@@ -1,0 +1,59 @@
+<!doctype>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TshirtTime</title>
+        <!-- Load Vue followed by Vue Router -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+          <header>
+            <nav>
+              <router-link to='/'>Accueil</router-link>
+              <router-link to='/tshirts'>Tshirts</router-link>
+              <router-link to='/createurs'>Créateurs</router-link>
+            </nav>
+          </header>
+          <main>
+            <router-view
+              :prop="prop"
+              @recup-emit="RecupEmit"
+            ></router-view>
+          </main>
+        </div>
+        
+        <script>
+            const Acceuil = window.httpVueLoader('./components/Acceuil.vue')
+
+            const routes = [
+                { path: '/', component: Acceuil },
+            ]
+
+            const router = new VueRouter({
+                routes
+            })
+
+            var app = new Vue({
+                router,
+                el: '#app',
+                data: {
+                    variable: "variable"
+                },
+                async mounted () {
+                    /*const res = await axios.get('/api/articles')
+                    this.articles = res.data*/
+                },
+                methods: {
+                    /*async addToPanier (articleId) {
+                        const res = await axios.post('/api/panier', { articleId, quantity: 1 })
+                        this.panier.articles.push(res.data)
+                    }*/
+                }
+            })
+        </script>
+    </body>
+</html>
