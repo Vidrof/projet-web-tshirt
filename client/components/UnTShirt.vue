@@ -5,7 +5,7 @@
             <div id="titre_note">
                 <h2 id="titre_annonce">Des tshirts de qualité</h2>
                 <div class="note">
-                    <h3>4.2 </h3><img class="star" src="img/star.svg" alt="little star">
+                    <h3>4.2 </h3><img class="star" src="img/star.png" alt="little star">
                 </div>
             </div>
             <p>11/12/2020</p>
@@ -17,11 +17,11 @@
                 <div id="notes">
                     <h3 class="titre">Avis :</h3>
                     <div id="moyenne">
-                        <img class="star" src="img/star.svg">
-                        <img class="star" src="img/star.svg">
-                        <img class="star" src="img/star.svg">
-                        <img class="star" src="img/star.svg">
-                        <img class="star" src="img/star.svg">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
                         <p>4,2 sur 5</p>
                     </div>
                     <div class="pourcentage">
@@ -53,11 +53,11 @@
                 <div id="commentaires">
                     <div id="form_commentaire">
                         <div id="stars">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
                         </div>
                         <input id="titre_form" type="text" placeholder="Titre">
                         <textarea id="description_form" type="text" placeholder="Description"></textarea>
@@ -69,11 +69,11 @@
                             <p>Mathéo du 99</p>
                         </div>
                         <div id="stars">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
-                            <img class="star" src="img/star.svg">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
+                            <img class="star" src="img/star.png">
                             <h4>Pas mal mais la police n'aime pas beaucoup</h4>
                         </div>
                         <p>J’ai bien essayé de porter ce tshirt à levalois mais la police m’a arrêté et depuis mon anus s’est agrandi de 2.3 centimètres donc je ne peux pas mettre le 5 étoiles ... A bon entendeur......</p>
@@ -203,6 +203,8 @@ hr{
 }
 .note h3{
     width: min-content;
+    line-height: 30px;
+    margin-right: 5px;
 }
 .star{
     height: 30px;
