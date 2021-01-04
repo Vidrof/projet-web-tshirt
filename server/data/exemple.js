@@ -1,4 +1,4 @@
-const example = [
+const exemple = [
   {
     id: 1,
     name: 'Clé USB',
@@ -8,5 +8,4 @@ const example = [
   }
 ]
   
-  module.exports = example
-  
+  module.exports = exemple
