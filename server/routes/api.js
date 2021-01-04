@@ -111,11 +111,66 @@ router.get('tshirt/:id_user', async(req, res) => {
 
   if(result.rows.length <= 0){
     res.status(401).json({
-      message: 'no tshirt with this id'
+      message: 'this user do not have any tshirt'
     })
     return
   }
 
-  res.send(result.rows[0])
+  res.send(result.rows)
+})
+
+router.get('tshirt/:id_user', async(req, res) => {
+  const id_user = req.params.id_user
+
+  const result = await client.query({
+    text : 'SELECT * from tshirt WHERE id_user=$1',
+    values: [id_user]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'this user do not have any tshirt'
+    })
+    return
+  }
+
+  res.send(result.rows)
+})
+
+router.get('avis/:id_tshirt', async(req, res) => {
+  const id_tshirt = req.params.id_tshirt
+
+  const result = await client.query({
+    text : 'SELECT * from avis WHERE id_tshirt=$1',
+    values: [id_tshirt]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'this tshirt do not have any avis'
+    })
+    return
+  }
+
+  res.send(result.rows)
+})
+
+
+router.get('avis/:id_user', async(req, res) => {
+  const id_user = req.params.id_user
+
+  const result = await client.query({
+    text : 'SELECT * from avis WHERE id_user=$1',
+    values: [id_user]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'this user hasn\'t post any avis'
+    })
+    return
+  }
+
+  res.send(result.rows)
 })
 module.exports = router
