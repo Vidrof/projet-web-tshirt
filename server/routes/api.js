@@ -1,6 +1,16 @@
 const express = require('express')
 const router = express.Router()
+const bcrypt = require('bcrypt')
+const { Client } = require('pg')
 
+const client = new Client({
+ user: 'postgres',
+ host: 'localhost',
+ password: '123',
+ database: 'tshirt_time'
+})
+
+client.connect()
 
 //route pour se connecter
 router.post('/login', async (req, res) => {
@@ -23,7 +33,7 @@ router.post('/login', async (req, res) => {
 
   if (await bcrypt.compare(password, user.password)) {
     // alors connecter l'utilisateur
-    req.session.userId = user.id
+    req.session.userId = user.id_user
     res.json({
       id: user.id,
       pseudo: user.pseudo,
@@ -64,6 +74,39 @@ router.post('/register', async (req, res) => {
     `,
     values: [email, hash, pseudo]
   })
+  res.send('ok')
+})
+
+// poster un tshirt
+router.post('/tshirt', async (req, res) => {
+  const description = req.body.description
+  const id_user = req.session.id_user
+  const image = req.body.image
+  const titre = req.body.titre
+
+  if(typeof id_user === 'undefined'){
+    res.status(401).json({
+      message: 'you are not connected'
+    })
+    return
+  }
+
+  if(typeof description === 'undefined'
+    || typeof image === 'undefined'
+    || typeof titre === 'undefined'){
+    res.status(401).json({
+      message: 'tshirt incomplete'
+    })
+    return
+  }
+
+  await client.query({
+    text: `INSERT INTO tshirt(description, id_user, image, titre)
+    VALUES ($1, $2, $3, $4)
+    `,
+    values: [description, id_user, image, titre]
+  })
+  
   res.send('ok')
 })
 
