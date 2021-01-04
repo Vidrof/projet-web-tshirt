@@ -16,6 +16,7 @@
               <router-link to='/'>Accueil</router-link>
               <router-link to='/tshirts'>Tshirts</router-link>
               <router-link to='/createurs'>Créateurs</router-link>
+              <router-link to='/register'>Mon compte</router-link>
             </nav>
           </header>
           <main>
@@ -28,9 +29,14 @@
         
         <script>
             const Acceuil = window.httpVueLoader('./components/Acceuil.vue')
-
+            const Tshirts = window.httpVueLoader('./components/Tshirts.vue')
+            const Créateurs = window.httpVueLoader('./components/Createurs.vue')
+            const Register = window.httpVueLoader('./components/Register.vue')
             const routes = [
                 { path: '/', component: Acceuil },
+                { path: '/', component: Tshirts },
+                { path: '/', component: Créateurs },
+                { path: '/', component: Register },
             ]
 
             const router = new VueRouter({
