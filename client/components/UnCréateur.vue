@@ -8,10 +8,19 @@
                     <h3>4.2 </h3><img class="star" src="img/star.svg" alt="little star">
                 </div>
             </div>
-            <p>11/12/2020</p>
+            <p>Actif depuis le : 11/12/2020</p>
             <hr>
-            <h3 class="titre">Description :</h3>
-            <p id="description">Des tshirts de qualité avec le message du collectif young 1-pac, nique les salopes qui parlents en scred, si le savoir est une arme hé ba nique ta mere, nique la canine et les stups parce qu’ils nous ont bien... Tu connais</p>
+            <h3 class="titre">Description du créateur:</h3>
+            <p id="description">Je suis super fort youpii ....</p>
+            <hr>
+            <div id="créations">
+                <h3 class="titre">Ses différentes créations :</h3>
+                <div id="création1">
+                    <button>Voir le produit</button>
+                </div>
+                <div id="création2">
+                    <button>Voir le produit</button>
+                </div>
             <hr>
             <div class="row">
                 <div id="notes">

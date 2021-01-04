@@ -30,14 +30,14 @@
     }   
     h1{
         text-align: center;
-        font-size: 64px;
-        margin-top: 12px;
+        font-size: 52px;
+        margin-top: 40px;
         margin-bottom: 24px;
 
     }
     .texte-acceuil{
         text-align: center;
-        font-size: 36px;
+        font-size: 28px;
         margin-left: 120px;
         margin-right:120px;
         margin-bottom : 24px;
@@ -50,15 +50,18 @@
     }
     .titre-carre{
         text-align: center;
-        font-size: 48px;
+        font-size: 38px;
         color: white;
         margin-bottom : 24px;
+        border: black 15px;
+        font-weight: 300;
     }
     .texte-carre{
         text-align: center;
-        font-size: 32px;
+        font-size: 26px;
         color: white;
         margin-bottom : 42px;
+        font-weight:300;
     }
     .images-du-mois{
         display: flex;
