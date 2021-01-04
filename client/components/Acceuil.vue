@@ -15,6 +15,11 @@
             <div class="texte-carre">
                 <p> Des créateurs de talents, des T-shirts de renom </p>
             </div>
+            <div class="images-du-mois">
+                <img src="./img/logo.jpg" alt="image de tshirt">
+                <img src="./img/logo.jpg" alt="image de tshirt">
+                <img src="./img/logo.jpg" alt="image de tshirt">
+            </div>
         </div>
     </div>
 </template>
@@ -40,8 +45,8 @@
     .carre-noir{
         background-color: black;
         width: 100%;
-        height: 80%;
-        position:fixed bottom;
+        height: 100%;
+        margin-top: 5%;
     }
     .titre-carre{
         text-align: center;
@@ -52,6 +57,12 @@
         text-align: center;
         font-size: 48px;
         color: white;
+    }
+    .images-du-mois{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 50%;
     }
 </style>
 
