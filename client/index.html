@@ -41,6 +41,12 @@
                 width: 40px;
                 height: 40px;
             }
+
+            header .logo_profil{
+                background-color: transparent;
+                width: 40px;
+                height: 40px;
+            }
         </style>
     </head>
     <body>
@@ -48,12 +54,12 @@
             <header>
                 <nav>
                     <router-link id="home" to='/'><img class="logo" src="img/logo.jpg"></router-link>
-                    
                     <router-link to='/tshirts'>Tshirts</router-link>
                     <router-link to='/createurs'>Créateurs</router-link>
-
+                    <img class="logo_profil" src="img/profil.png">
+                    <router-link to='/log_in'>Se connecter</router-link>
+                    <router-link to='/sign_up'>S'enregistrer</router-link>
                     <img class="logo left" src="img/logo.jpg">
-                    <!-- se connecter et S'enregistrer -->
                 </nav>
             </header>
             <main>
@@ -65,11 +71,15 @@
             const Acceuil = window.httpVueLoader('./components/Acceuil.vue')
             const Tshirts = window.httpVueLoader('./components/Tshirts.vue')
             const UnTshirt = window.httpVueLoader('./components/UnTShirt.vue')
+            const Sign_up = window.httpVueLoader('./components/Sign_up.vue')
+            const Log_in = window.httpVueLoader('.components/Log_in.vue')
 
             const routes = [
                 { path: '/', component: Acceuil },
                 { path: '/tshirts', component: Tshirts },
                 { path: '/un_tshirt', component: UnTshirt },
+                { path: '/sign_up', component: Sign_up},
+                { path: '/log_in', component: Log_in}
             ]
 
             const router = new VueRouter({
