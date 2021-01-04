@@ -4,25 +4,9 @@
         <div id="register">
             <form @submit.prevent="createUser()">
                 <div>
-                    <label for="civilité">Civilité*</label>
-                    <div class="select_civilité">
-                        <select id="civilité" name="civilité">
-                            <option value="none" selected disabled hidden>Civilité</option>
-                            <option value="mme">Mme</option>
-                            <option value="m">M</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label for="lastname">Nom*</label>
-                    <div class="field_lastname"> 
-                        <input type="texte" id="lastname" v-model="text" placeholder="Nom">
-                    </div>
-                </div>
-                <div>
-                    <label for="name">Prénom*</label>
-                    <div class="field_firstname"> 
-                        <input type="texte" id="name" v-model="text" placeholder="Prénom">
+                    <label for="pseudo">Pseudo*</label>
+                    <div class="field_pseudo"> 
+                        <input type="texte" id="pseudo" v-model="text" placeholder="Pseudo">
                     </div>
                 </div>
                 <div>
@@ -74,7 +58,7 @@
         color: #004079;
     }
 
-    .select_civilité, .field_lastname, .field_firstname, .field_mail, .field_password, .field_cpassword{
+    .field_pseudo, .field_mail, .field_password, .field_cpassword{
         display: block;
         margin-bottom: .9em;
         margin-top: .2em;
@@ -89,8 +73,7 @@
         },
         data () {
         return {
-            nom: '',
-            prénom:'',
+            pseudo: '',
             email: '',
             password: ''
         }
@@ -100,8 +83,7 @@
         methods: {
         async createUser() {
             await axios.post('/api/register', {
-            nom: this.nom,
-            prénom: this.prénom,
+            nom: this.pseudo,
             email: this.email,
             password: this.password
             })
