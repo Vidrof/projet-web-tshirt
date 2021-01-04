@@ -8,29 +8,68 @@
         <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+                font-family: 'Roboto', sans-serif;
+            }
+            header a{
+                display: block;
+                width: 200px;
+                height: 30px;
+                background-color: white;
+                text-decoration: none;
+                color: black;
+                line-height: 30px;
+                text-align: center;
+                margin: 0 10px;
+            }
+            header #home{
+                width: auto;
+                height: auto;
+                background-color: none;
+            }
+            header nav{
+                background-color: #383838;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            header .logo{
+                width: 40px;
+                height: 40px;
+            }
+        </style>
     </head>
     <body>
         <div id="app">
-          <header>
-            <nav>
-              <router-link to='/'>Accueil</router-link>
-              <router-link to='/tshirts'>Tshirts</router-link>
-              <router-link to='/createurs'>Créateurs</router-link>
-            </nav>
-          </header>
-          <main>
-            <router-view
-              :prop="prop"
-              @recup-emit="RecupEmit"
-            ></router-view>
-          </main>
+            <header>
+                <nav>
+                    <router-link id="home" to='/'><img class="logo" src="img/logo.jpg"></router-link>
+                    
+                    <router-link to='/tshirts'>Tshirts</router-link>
+                    <router-link to='/createurs'>Créateurs</router-link>
+
+                    <img class="logo left" src="img/logo.jpg">
+                    <!-- se connecter et S'enregistrer -->
+                </nav>
+            </header>
+            <main>
+                <router-view></router-view>
+            </main>
         </div>
         
         <script>
             const Acceuil = window.httpVueLoader('./components/Acceuil.vue')
+            const Tshirts = window.httpVueLoader('./components/Tshirts.vue')
+            const UnTshirt = window.httpVueLoader('./components/UnTShirt.vue')
 
             const routes = [
                 { path: '/', component: Acceuil },
+                { path: '/tshirts', component: Tshirts },
+                { path: '/un_tshirt', component: UnTshirt },
             ]
 
             const router = new VueRouter({
