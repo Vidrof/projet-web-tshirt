@@ -26,7 +26,8 @@
     h1{
         text-align: center;
         font-size: 64px;
-        
+        margin-top: 12px;
+        margin-bottom: 24px;
 
     }
     p{
@@ -34,10 +35,23 @@
         font-size: 36px;
         margin-left: 120px;
         margin-right:120px;
+        margin-bottom : 24px;
     }
     .carre-noir{
         background-color: black;
         width: 100%;
+        height: 80%;
+        position:fixed bottom;
+    }
+    .titre-carre{
+        text-align: center;
+        font-size: 64px;
+        color: white;
+    }
+    .texte-carre{
+        text-align: center;
+        font-size: 48px;
+        color: white;
     }
 </style>
 
