@@ -2,7 +2,7 @@
     <div>
         <div>
             <h1>Des T-shirts en veux-tu en voilà !!!</h1>
-            <p>
+            <p class="texte-acceuil">
                 Notre site a pour vocation de réveiller des vocations. 
                 Je sais ce que vous vous dites, c’est du baratin. 
                 Mais non j’y crois vraiment. 
@@ -13,7 +13,7 @@
                 <p> Les T-Shirts du mois ! </p>
             </div>
             <div class="texte-carre">
-                <p> Des créateurs de talents, des T-shirts de renom </p>
+                <p> Des créateurs de talents, des T-shirts de renom :</p>
             </div>
             <div class="images-du-mois">
                 <img src="./img/logo.jpg" alt="image de tshirt">
@@ -35,7 +35,7 @@
         margin-bottom: 24px;
 
     }
-    p{
+    .texte-acceuil{
         text-align: center;
         font-size: 36px;
         margin-left: 120px;
@@ -50,19 +50,20 @@
     }
     .titre-carre{
         text-align: center;
-        font-size: 64px;
+        font-size: 48px;
         color: white;
+        margin-bottom : 24px;
     }
     .texte-carre{
         text-align: center;
-        font-size: 48px;
+        font-size: 32px;
         color: white;
+        margin-bottom : 42px;
     }
     .images-du-mois{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        border-radius: 50%;
     }
 </style>
 

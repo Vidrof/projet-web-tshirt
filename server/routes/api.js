@@ -83,5 +83,39 @@ router.get('/tshirt', async(req, res) => {
   res.send(result.rows)
 })
 
-router.get('tshirt/:id_tshirt')
+router.get('tshirt/:id_tshirt', async(req, res) => {
+  const id_tshirt = req.params.id_tshirt
+
+  const result = await client.query({
+    text : 'SELECT * from tshirt WHERE id_tshirt=$1',
+    values: [id_tshirt]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'no tshirt with this id'
+    })
+    return
+  }
+
+  res.send(result.rows[0])
+})
+
+router.get('tshirt/:id_user', async(req, res) => {
+  const id_user = req.params.id_user
+
+  const result = await client.query({
+    text : 'SELECT * from tshirt WHERE id_user=$1',
+    values: [id_user]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'no tshirt with this id'
+    })
+    return
+  }
+
+  res.send(result.rows[0])
+})
 module.exports = router
