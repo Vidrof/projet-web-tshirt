@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const example = require('../data/example.js')
+
 
 /*
 class Objet {

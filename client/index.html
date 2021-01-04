@@ -45,7 +45,6 @@
     </head>
     <body>
         <div id="app">
-<<<<<<< HEAD
             <header>
                 <nav>
                     <router-link id="home" to='/'><img class="logo" src="img/logo.jpg"></router-link>
@@ -60,43 +59,17 @@
             <main>
                 <router-view></router-view>
             </main>
-=======
-          <header>
-            <nav>
-              <router-link to='/'>Accueil</router-link>
-              <router-link to='/tshirts'>Tshirts</router-link>
-              <router-link to='/createurs'>Créateurs</router-link>
-              <router-link to='/register'>Mon compte</router-link>
-            </nav>
-          </header>
-          <main>
-            <router-view
-              :prop="prop"
-              @recup-emit="RecupEmit"
-            ></router-view>
-          </main>
->>>>>>> e58e46424d8200441d4af8742e0b46c0b9810d11
         </div>
         
         <script>
             const Acceuil = window.httpVueLoader('./components/Acceuil.vue')
             const Tshirts = window.httpVueLoader('./components/Tshirts.vue')
-<<<<<<< HEAD
             const UnTshirt = window.httpVueLoader('./components/UnTShirt.vue')
 
             const routes = [
                 { path: '/', component: Acceuil },
                 { path: '/tshirts', component: Tshirts },
                 { path: '/un_tshirt', component: UnTshirt },
-=======
-            const Créateurs = window.httpVueLoader('./components/Createurs.vue')
-            const Register = window.httpVueLoader('./components/Register.vue')
-            const routes = [
-                { path: '/', component: Acceuil },
-                { path: '/', component: Tshirts },
-                { path: '/', component: Créateurs },
-                { path: '/', component: Register },
->>>>>>> e58e46424d8200441d4af8742e0b46c0b9810d11
             ]
 
             const router = new VueRouter({
