@@ -53,8 +53,8 @@
         font-size: 38px;
         color: white;
         margin-bottom : 24px;
-        border: black 15px;
         font-weight: 300;
+        padding-top: 25px;
     }
     .texte-carre{
         text-align: center;
