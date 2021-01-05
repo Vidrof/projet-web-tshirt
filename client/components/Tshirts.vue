@@ -78,6 +78,13 @@
         display: flex;
         flex-direction: column;
         font-size : 24px;
+        padding : 20px;
+    }
+    .caracteristiques label{
+      margin-bottom: 10px;
+    }
+    .caracteristiques select{
+      margin-bottom: 15px;
     }
 </style>
 <script>
