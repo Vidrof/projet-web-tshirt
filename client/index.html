@@ -57,6 +57,7 @@
                     <router-link to='/tshirts'>Tshirts</router-link>
                     <router-link to='/createurs'>Créateurs</router-link>
                     <img class="logo_profil" src="./img/profil.png">
+                    <router-link to='/vente'>Vente</router-link>
                     <router-link v-if="!isConnected" to='/log_in'>Se connecter</router-link>
                     <router-link v-if="!isConnected" to='/sign_up'>S'enregistrer</router-link>
                 </nav>
@@ -73,16 +74,16 @@
             const Tshirts = window.httpVueLoader('./components/Tshirts.vue')
             const UnTshirt = window.httpVueLoader('./components/UnTShirt.vue')
             const Sign_up = window.httpVueLoader('./components/Sign_up.vue')
-            const Log_in = window.httpVueLoader('./components/Log_in.vue')
+            const Vente = window.httpVueLoader('./components/Vente.vue')
 
             const routes = [
                 { path: '/', component: Acceuil },
                 { path: '/tshirts', component: Tshirts },
                 { path: '/un_tshirt', component: UnTshirt },
                 { path: '/sign_up', component: Sign_up},
-                { path: '/log_in', component: Log_in}
+                { path: '/log_in', component: Log_in},
+                { path: '/vente', component: Vente}
             ]
-
             const router = new VueRouter({
                 routes
             })
