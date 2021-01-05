@@ -36,6 +36,10 @@
                         <option value="Gris">Gris</option>
                         <option value="Cyan">Cyan</option>
                     </select>
+                <label for="creator-search">Chercher un créateur</label>
+                        <input type="search" id="creator-search" name="q"
+                         aria-label="Rechercher un createur particulier">
+                        <button>Search</button>
             </div>
             <button>Recherche</button>
         </div>
@@ -70,6 +74,11 @@
         background-color: #416aff;
         box-shadow: inset 20px 20px 60px #375ad9, 
             inset -20px -20px 60px #4b7aff;
+    }
+    .caracteristiques{
+        display: flex;
+        flex-direction: column;
+        font-size : 24px;
     }
 </style>
 <script>
