@@ -16,9 +16,9 @@
                 <p> Des créateurs de talents, des T-shirts de renom :</p>
             </div>
             <div class="images-du-mois">
-                <img src="./img/logo.jpg" alt="image de tshirt">
-                <img src="./img/logo.jpg" alt="image de tshirt">
-                <img src="./img/logo.jpg" alt="image de tshirt">
+                <img id="img1" src="./img/logo.jpg" alt="image de tshirt">
+                <img id="img2" src="./img/logo.jpg" alt="image de tshirt">
+                <img id="img3" src="./img/logo.jpg" alt="image de tshirt">
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
     h1{
         text-align: center;
         font-size: 52px;
-        margin-top: 40px;
+        margin-top: 100px;
         margin-bottom: 24px;
 
     }
@@ -40,13 +40,12 @@
         font-size: 28px;
         margin-left: 120px;
         margin-right:120px;
-        margin-bottom : 24px;
+        margin-bottom : 100px;
     }
     .carre-noir{
         background-color: black;
         width: 100%;
         height: 100%;
-        margin-top: 5%;
     }
     .titre-carre{
         text-align: center;
@@ -54,7 +53,7 @@
         color: white;
         margin-bottom : 24px;
         font-weight: 300;
-        padding-top: 25px;
+        padding-top: 50px;
     }
     .texte-carre{
         text-align: center;
@@ -66,7 +65,35 @@
     .images-du-mois{
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        width: max-content;
+        margin: 0 auto;
+    }
+    .images-du-mois img{
+        width: 300px;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 30px;
+        opacity: 70%;
+    }
+    #img1{
+        transform: rotate(15deg);
+        margin-left: 20px;
+        margin-right: 50px;
+    }
+    #img2{
+        transform: rotate(-15deg);
+        margin-top: 75px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    #img3{
+        transform: rotate(2deg);
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .images-du-mois img:hover{
+        opacity: 100%;
+        z-index: 2;
     }
 </style>
 
