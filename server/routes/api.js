@@ -47,6 +47,42 @@ router.post('/login', async (req, res) => {
     return
   }
 })
+
+//changer sa description
+router.post('/login', async (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+
+  const result = await client.query({
+    text: 'SELECT * FROM users WHERE email=$1',
+    values: [email]
+  })
+
+  if (result.rows.length === 0) {
+    res.status(401).json({
+      message: 'user doesnt exist'
+    })
+    return
+  }
+
+  const user = result.rows[0]
+
+  if (await bcrypt.compare(password, user.password)) {
+    // alors connecter l'utilisateur
+    req.session.userId = user.id_user
+    res.json({
+      id: user.id,
+      pseudo: user.pseudo,
+      email: user.email,
+      description: user.description
+    })
+  } else {
+    res.status(401).json({
+      message: 'bad password'
+    })
+    return
+  }
+})
 //s'enregistrer
 router.post('/register', async (req, res) => {
   const email = req.body.email

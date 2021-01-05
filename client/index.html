@@ -73,17 +73,21 @@
             const Acceuil = window.httpVueLoader('./components/Acceuil.vue')
             const Tshirts = window.httpVueLoader('./components/Tshirts.vue')
             const UnTshirt = window.httpVueLoader('./components/UnTShirt.vue')
+            const UnCreateur = window.httpVueLoader('./components/UnCreateur.vue')
             const Sign_up = window.httpVueLoader('./components/Sign_up.vue')
             const Vente = window.httpVueLoader('./components/Vente.vue')
             const Log_in = window.httpVueLoader('./components/Log_in.vue')
+            const Createurs = window.httpVueLoader('./components/Createurs.vue')
 
             const routes = [
                 { path: '/', component: Acceuil },
                 { path: '/tshirts', component: Tshirts },
                 { path: '/un_tshirt', component: UnTshirt },
+                { path: '/un_createur', component: UnCreateur },
                 { path: '/sign_up', component: Sign_up},
                 { path: '/log_in', component: Log_in},
-                { path: '/vente', component: Vente}
+                { path: '/vente', component: Vente},
+                { path: '/createurs', component: Createurs}
             ]
             const router = new VueRouter({
                 routes
