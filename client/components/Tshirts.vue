@@ -39,7 +39,6 @@
                 <label for="creator-search">Chercher un créateur</label>
                         <input type="search" id="creator-search" name="q"
                          aria-label="Rechercher un createur particulier">
-                        <button>Search</button>
             </div>
             <button>Recherche</button>
         </div>
