@@ -57,6 +57,8 @@
         box-shadow: 0 0 19px rgba(0, 0, 0, 0.25);
         border-radius: 17px;
         margin: 0 auto;
+        display: flex;
+        flex-direction:column;
     }
     #filtres button{
         background-color: #4D74FF;
@@ -64,7 +66,8 @@
         padding: 10px 20px;
         border-radius: 50px;
         border: none;
-        position: fixed center;
+        margin-right: auto;
+        margin-left:auto;
         margin-top:20px;
         margin-bottom:20px;
     }
