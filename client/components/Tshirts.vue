@@ -54,7 +54,6 @@
     }
     #filtres{
         width: 500px;
-        height: 300px;
         box-shadow: 0 0 19px rgba(0, 0, 0, 0.25);
         border-radius: 17px;
         margin: 0 auto;
@@ -65,6 +64,9 @@
         padding: 10px 20px;
         border-radius: 50px;
         border: none;
+        position: fixed center;
+        margin-top:20px;
+        margin-bottom:20px;
     }
     #filtres button:hover{
         background-color: #416aff;
