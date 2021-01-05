@@ -72,6 +72,7 @@
 </style>
 
 <script>
+/*
     const Sign_up = window.httpVueLoader('./Sign_up.vue')
     const routes = [
         { path: '/sign_up', component: Sign_up},
@@ -79,4 +80,5 @@
     const router = new VueRouter({
         routes
     })
+*/
 </script>
