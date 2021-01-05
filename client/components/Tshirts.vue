@@ -2,40 +2,40 @@
     <div>
         <h2>Des Tshirts ? La réponse est oui !</h2>
         <div id="filtres">
-            <div class="colonne1">
-                <nav>
-                    <li><a href="#">Catégorie</a>
-                        <ul>
-                            <li><a href="#">Col rond</a></li>
-                            <li><a href="#">Col V</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Note</a>
-                        <ul>
-                            <li><a href="#">0+</a></li>
-                            <li><a href="#">1+</a></li>
-                            <li><a href="#">2+</a></li>
-                            <li><a href="#">3+</a></li>
-                            <li><a href="#">4+</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Couleur</a>
-                        <ul>
-                            <li><a href="#">Bleu</a></li>
-                            <li><a href="#">Rouge</a></li>
-                            <li><a href="#">Jaune</a></li>
-                            <li><a href="#">Vert</a></li>
-                            <li><a href="#">Noir</a></li>
-                            <li><a href="#">Blanc</a></li>
-                            <li><a href="#">Orange</a></li>
-                            <li><a href="#">Violet</a></li>
-                            <li><a href="#">Rose</a></li>
-                            <li><a href="#">Marron</a></li>
-                            <li><a href="#">Gris</a></li>
-                        </ul>
-                    </li>
-            </nav>
+            <div class="caracteristiques">
+                <label for="categorie">Catégorie :</label>
+                    <select name="cat" id="cat-select">
+                        <option value="">Choississez un type de T-shirt</option>
+                        <option value="Rond">Col Rond</option>
+                        <option value="V">Col V</option>
+                        <option value="UV">Col Ultra V</option>
+                    </select>
+                <label for="note">Note :</label>
+                    <select name="note" id="note-select">
+                        <option value="">Choississez une note de T-shirt</option>
+                        <option value="0+">0+</option>
+                        <option value="1+">1+</option>
+                        <option value="2+">2+</option>
+                        <option value="3+">3+</option>
+                        <option value="4+">4+</option>
+                        <option value="5">5</option>
+                    </select>
+                <label for="note">Couleur :</label>
+                    <select name="note" id="note-select">
+                        <option value="">Choississez une couleur de T-shirt</option>
+                        <option value="Bleu">Bleu</option>
+                        <option value="Rouge">Rouge</option>
+                        <option value="Vert">Vert</option>
+                        <option value="Jaune">Jaune</option>
+                        <option value="Rose">Rose</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Violet">Violet</option>
+                        <option value="Noir">Noir</option>
+                        <option value="Blanc">Blanc</option>
+                        <option value="Marron">Marron</option>
+                        <option value="Gris">Gris</option>
+                        <option value="Cyan">Cyan</option>
+                    </select>
             </div>
             <button>Recherche</button>
         </div>
@@ -70,50 +70,6 @@
         background-color: #416aff;
         box-shadow: inset 20px 20px 60px #375ad9, 
             inset -20px -20px 60px #4b7aff;
-    }
-    li {
-        list-style:none !important;
-        color:#FFF;
-        padding:10px;
-        font-size:20px;
-        text-decoration:none;
-    }
- 
-    nav {
-        background-color:#64abfb;
-        padding:0;
-        margin:0;
-    }
- 
-    nav li {
-        list-style: none;
-        line-height:44px;
-        float:left;
-        background-color:#64abfb;
-    }
- 
-    nav li a {
-        color:#FFF;
-        padding:10px;
-        font-size:20px;
-    text-decoration:none;
-    }
- 
-    li a:hover {
-        border-bottom:3px #FFF solid;
-    }
-    nav li ul { display:none; } /* Rend le menu déroulant caché par défaut */
- 
-    nav li:hover ul { /* Affiche la dropNav au survol de la souris avec la class .drop */
-        z-index:99999;
-        display:list-item !important;
-        position:absolute;
-        margin-top:5px;
-        margin-left:-10px;
-    }
- 
-    nav li:hover ul li {
-        float:none;
     }
 </style>
 <script>
