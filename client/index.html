@@ -57,12 +57,14 @@
                     <router-link to='/tshirts'>Tshirts</router-link>
                     <router-link to='/createurs'>Créateurs</router-link>
                     <img class="logo_profil" src="./img/profil.png">
-                    <router-link to='/log_in'>Se connecter</router-link>
-                    <router-link to='/sign_up'>S'enregistrer</router-link>
+                    <router-link v-if="!isConnected" to='/log_in'>Se connecter</router-link>
+                    <router-link v-if="!isConnected" to='/sign_up'>S'enregistrer</router-link>
                 </nav>
             </header>
             <main>
-                <router-view></router-view>
+                <router-view
+                    @login="login"
+                ></router-view>
             </main>
         </div>
         
@@ -89,17 +91,20 @@
                 router,
                 el: '#app',
                 data: {
-                    variable: "variable"
+                    variable: "variable",
+                    isConnected: false
                 },
                 async mounted () {
                     /*const res = await axios.get('/api/articles')
                     this.articles = res.data*/
                 },
                 methods: {
-                    /*async addToPanier (articleId) {
-                        const res = await axios.post('/api/panier', { articleId, quantity: 1 })
-                        this.panier.articles.push(res.data)
-                    }*/
+                    async login (user) {
+                        const res = await axios.post('/api/login', user)
+                        this.user = res.data
+                        this.isConnected = true
+                        this.$router.push('/')
+                    }
                 }
             })
         </script>

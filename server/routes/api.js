@@ -12,7 +12,7 @@ const client = new Client({
 
 client.connect()
 
-//route pour se connecter
+//se connecter
 router.post('/login', async (req, res) => {
   const email = req.body.email
   const password = req.body.password
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
     return
   }
 })
-
+//s'enregistrer
 router.post('/register', async (req, res) => {
   const email = req.body.email
   const password = req.body.password
@@ -143,7 +143,7 @@ router.get('tshirt/:id_tshirt', async(req, res) => {
 
   res.send(result.rows[0])
 })
-
+//récuperer les tshirt lié à un user
 router.get('tshirt/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 
@@ -162,24 +162,43 @@ router.get('tshirt/:id_user', async(req, res) => {
   res.send(result.rows)
 })
 
-router.get('tshirt/:id_user', async(req, res) => {
-  const id_user = req.params.id_user
+// poster un avis
+router.post('/avis', async (req, res) => {
+  const note = req.body.note
+  const contenu = req.body.contenu
+  const titre = req.body.titre
+  const id_tshirt = req.body.id_tshirt
 
-  const result = await client.query({
-    text : 'SELECT * from tshirt WHERE id_user=$1',
-    values: [id_user]
-  })
+  const id_user = req.session.id_user
 
-  if(result.rows.length <= 0){
+  if(typeof id_user === 'undefined'){
     res.status(401).json({
-      message: 'this user do not have any tshirt'
+      message: 'you are not connected'
     })
     return
   }
 
-  res.send(result.rows)
+  if(typeof note === 'undefined'
+    || typeof contenu === 'undefined'
+    || typeof titre === 'undefined'
+    || typeof id_tshirt === 'undefined'){
+    res.status(401).json({
+      message: 'tshirt incomplete'
+    })
+    return
+  }
+
+  await client.query({
+    text: `INSERT INTO tshirt(note, contenu, titre, id_user, id_tshirt)
+    VALUES ($1, $2, $3, $4, $5)
+    `,
+    values: [note, contenu, titre, id_user, id_tshirt]
+  })
+  
+  res.send('ok')
 })
 
+//recupérer les avis d'un tshirt
 router.get('avis/:id_tshirt', async(req, res) => {
   const id_tshirt = req.params.id_tshirt
 
@@ -198,7 +217,7 @@ router.get('avis/:id_tshirt', async(req, res) => {
   res.send(result.rows)
 })
 
-
+//recupérer les avis posté par un user
 router.get('avis/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 

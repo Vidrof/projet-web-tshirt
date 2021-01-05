@@ -6,7 +6,7 @@
                 <div>
                     <label for="pseudo">Pseudo*</label>
                     <div class="field_pseudo"> 
-                        <input type="texte" id="pseudo" v-model="text" placeholder="Pseudo">
+                        <input type="texte" id="pseudo" v-model="pseudo" placeholder="Pseudo">
                     </div>
                 </div>
                 <div>
@@ -67,28 +67,28 @@
 
 <script>
     module.exports = {
-        props: {
-        articles: { type: Array, default: [] },
-        panier: { type: Object }
-        },
         data () {
-        return {
-            pseudo: '',
-            email: '',
-            password: ''
-        }
+            return {
+                pseudo: '',
+                email: '',
+                password: '',
+                c_password: ''
+            }
         },
         async mounted () {
         },
         methods: {
-        async createUser() {
-            await axios.post('/api/register', {
-            nom: this.pseudo,
-            email: this.email,
-            password: this.password
-            })
-            this.$router.push('/')
-        }
+            async createUser() {
+                if(this.c_password === this.password){
+                    console.log('les password sont identiques !')
+                    const res = await axios.post('/api/register', {
+                        pseudo: this.pseudo,
+                        email: this.email,
+                        password: this.password
+                    })
+                    console.log("tout c'est bien passé")
+                }
+            }
         }
     }
 </script>

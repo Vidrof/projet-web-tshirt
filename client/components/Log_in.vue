@@ -25,12 +25,6 @@
             <div class="sign_up">
                 <router-link to='/sign_up'>Créer un compte</router-link>
             </div>
-        <main>
-            <router-view>
-                :prop="prop"
-                @recup-emit="RecupEmit"
-            </router-view>
-        </main>
     </div>
 </template>
 
@@ -72,11 +66,22 @@
 </style>
 
 <script>
-    const Sign_up = window.httpVueLoader('./Sign_up.vue')
-    const routes = [
-        { path: '/sign_up', component: Sign_up},
-    ]
-    const router = new VueRouter({
-        routes
-    })
+    module.exports = {
+        data () {
+            return {
+                email: '',
+                password: '',
+            }
+        },
+        async mounted () {
+        },
+        methods: {
+            async loginUser() {
+                this.$emit('login', {
+                    email: this.email,
+                    password: this.password
+                })
+            }
+        }
+    }
 </script>
