@@ -79,20 +79,20 @@
         text-decoration:none;
     }
  
-    nav ul {
+    nav {
         background-color:#64abfb;
         padding:0;
         margin:0;
     }
  
-    nav ul li {
+    nav li {
         list-style: none;
         line-height:44px;
         float:left;
         background-color:#64abfb;
     }
  
-    nav ul li a {
+    nav li a {
         color:#FFF;
         padding:10px;
         font-size:20px;
@@ -102,9 +102,9 @@
     li a:hover {
         border-bottom:3px #FFF solid;
     }
-    nav ul li ul { display:none; } /* Rend le menu déroulant caché par défaut */
+    nav li ul { display:none; } /* Rend le menu déroulant caché par défaut */
  
-    nav ul li:hover ul { /* Affiche la dropNav au survol de la souris avec la class .drop */
+    nav li:hover ul { /* Affiche la dropNav au survol de la souris avec la class .drop */
         z-index:99999;
         display:list-item !important;
         position:absolute;
@@ -112,7 +112,7 @@
         margin-left:-10px;
     }
  
-    nav ul li:hover ul li {
+    nav li:hover ul li {
         float:none;
     }
 </style>
