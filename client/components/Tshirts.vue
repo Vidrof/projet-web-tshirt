@@ -91,9 +91,11 @@ module.exports = {
         }
     },
     async created(){
-        const result = await axios.get('/api/types', {})
-        const result = await axios.get('/api/couleurs', {})
-        this.produits = result.data
+        const result = await axios.get('/api/types')
+        this.types = result.data
+
+        const result2 = await axios.get('/api/couleurs')
+        this.couleurs = result2.data
     }
 }
 </script>
