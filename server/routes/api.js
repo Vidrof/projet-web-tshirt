@@ -12,6 +12,16 @@ const client = new Client({
 
 client.connect()
 
+router.delete('/me', async (req, res) => {
+  if (typeof req.session.userId === 'undefined') {
+    res.send('non connecté')
+    return
+  }
+
+  delete req.session.userId
+
+  res.send('ok')
+})
 router.get('/me', async (req, res) => {
   if (typeof req.session.userId === 'undefined') {
     res.status(401).json({ message: 'not connected' })
@@ -278,6 +288,36 @@ router.get('avis/:id_user', async(req, res) => {
   if(result.rows.length <= 0){
     res.status(401).json({
       message: 'this user hasn\'t post any avis'
+    })
+    return
+  }
+
+  res.send(result.rows)
+})
+
+router.get('/types', async(req, res) => {
+  const result = await client.query({
+    text: 'SELECT * from types'
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'no types available'
+    })
+    return
+  }
+
+  res.send(result.rows)
+})
+
+router.get('/couleurs', async(req, res) => {
+  const result = await client.query({
+    text: 'SELECT * from couleurs'
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'no couleurs available'
     })
     return
   }
