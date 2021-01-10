@@ -55,6 +55,8 @@
         box-shadow: 0 0 19px rgba(0, 0, 0, 0.25);
         border-radius: 17px;
         margin: 0 auto;
+        display: flex;
+        flex-direction:column;
     }
     #filtres button{
         background-color: #4D74FF;
@@ -70,6 +72,18 @@
         background-color: #416aff;
         box-shadow: inset 20px 20px 60px #375ad9, 
             inset -20px -20px 60px #4b7aff;
+    }
+    .caracteristiques{
+        display: flex;
+        flex-direction: column;
+        font-size : 24px;
+        padding : 20px;
+    }
+    .caracteristiques label{
+      margin-bottom: 10px;
+    }
+    .caracteristiques select{
+      margin-bottom: 15px;
     }
 </style>
 <script>
