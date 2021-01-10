@@ -28,7 +28,7 @@
             <button>Recherche</button>
         </div>
         <annonce 
-            :annonce="annonce"
+            :annonce="tshirt"
             v-for="tshirt in tshirts"
             v-bind:key="tshirt.id">
         </annonce>

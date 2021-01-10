@@ -7,7 +7,7 @@
                 <div class="note"><h3>4.2 </h3><img class="star" src="img/star.svg" alt="little star"></div>
             </div>
             <div class="description">
-                <p>Un tshirt c’est quoi ? Un tshirt c’est dla peuf voilà cque c’est ok ? jpense que la vie c’est des rencontres</p>
+                <p>{{annonce.titre}}</p>
             </div>
             <button>En savoir plus</button>
         </div>
@@ -68,6 +68,9 @@
 </style>
 <script>
 module.exports = {
-	name:"Annonce"
+    name:"Annonce",
+    props: {
+        annonce: {type:Object},
+}
 }
 </script>
