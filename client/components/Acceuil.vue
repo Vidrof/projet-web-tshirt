@@ -33,7 +33,11 @@
         font-size: 52px;
         margin-top: 100px;
         margin-bottom: 24px;
-
+        font-style: normal;
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 135px;
+        text-align: center;
     }
     .texte-acceuil{
         text-align: center;
