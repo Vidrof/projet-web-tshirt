@@ -27,7 +27,11 @@
             </div>
             <button>Recherche</button>
         </div>
-        <annonce></annonce>
+        <annonce 
+            :annonce="annonce"
+            v-for="tshirt in tshirts"
+            v-bind:key="tshirt.id">
+        </annonce>
     </div>
 </template>
 
@@ -87,9 +91,11 @@ module.exports = {
     data () {
         return {
             types: [],
-            types: 0,
+            type: 0,
             couleurs: [],
-            couleur: 0
+            couleur: 0,
+            tshirts: [],
+            tshirt:0
         }
     },
     async created(){
@@ -98,6 +104,10 @@ module.exports = {
 
         const result2 = await axios.get('/api/couleurs')
         this.couleurs = result2.data
+
+        const result3 = await axios.get('/api/tshirt')
+        this.tshirts = result3.data
+        console.log(result3)
     }
 }
 </script>
