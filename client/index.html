@@ -80,14 +80,14 @@
             const Createurs = window.httpVueLoader('./components/Createurs.vue')
 
             const routes = [
-                { path: '/', component: Acceuil },
-                { path: '/tshirts', component: Tshirts },
-                { path: '/un_tshirt', component: UnTshirt },
-                { path: '/un_createur', component: UnCreateur },
-                { path: '/sign_up', component: Sign_up},
-                { path: '/log_in', component: Log_in},
-                { path: '/vente', component: Vente},
-                { path: '/createurs', component: Createurs}
+                { path: '/', component: Acceuil, meta: {title: 'Accueil'} },
+                { path: '/tshirts', component: Tshirts, meta: {title: 'Tshirts'} },
+                { path: '/un_tshirt', component: UnTshirt, meta: {title: 'Page tshirt'} },
+                { path: '/un_createur', component: UnCreateur, meta: {title: 'Page créateur'} },
+                { path: '/sign_up', component: Sign_up, meta: {title: 'S\'enregistrer'}},
+                { path: '/log_in', component: Log_in, meta :{title: 'Se connecter'}},
+                { path: '/vente', component: Vente, meta: {title: 'Vente'}},
+                { path: '/createurs', component: Createurs, meta: {title: 'Créateurs'}}
             ]
             const router = new VueRouter({
                 routes
@@ -121,6 +121,12 @@
                         this.$router.push('/')
                     }
                 }
+            })
+            const default_title = 'Some Default Title';
+                router.afterEach((to, from) => {
+                    Vue.nextTick(() => {
+                        document.title = to.meta.title || default_title;
+                });
             })
         </script>
     </body>
