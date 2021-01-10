@@ -12,6 +12,19 @@ const client = new Client({
 
 client.connect()
 
+router.get('/me', async (req, res) => {
+  if (typeof req.session.userId === 'undefined') {
+    res.status(401).json({ message: 'not connected' })
+    return
+  }
+
+  const result = await client.query({
+    text: 'SELECT id_user, email FROM users WHERE id_user=$1',
+    values: [req.session.userId]
+  })
+
+  res.json(result.rows[0])
+})
 //se connecter
 router.post('/login', async (req, res) => {
   const email = req.body.email
@@ -71,7 +84,7 @@ router.post('/login', async (req, res) => {
     // alors connecter l'utilisateur
     req.session.userId = user.id_user
     res.json({
-      id: user.id,
+      id: user.id_user,
       pseudo: user.pseudo,
       email: user.email,
       description: user.description
