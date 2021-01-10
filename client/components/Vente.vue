@@ -6,22 +6,22 @@
                 <div class="ajouter_produit">
                     <div class="field_description">
                         <label for="description">Titre :</label>
-                        <input type="text" id="description" name="description" placeholder="Veuillez saisir un titre">
+                        <input v-model="titre" type="text" id="description" name="description" placeholder="Veuillez saisir un titre">
                     </div>
                     <div class="field_description">
                         <label for="description">Description :</label>
-                        <input type="text" id="description" name="description" placeholder="Veuillez saisir une description">
+                        <input v-model="description" type="text" id="description" name="description" placeholder="Veuillez saisir une description">
                     </div>
                     <div class="field_catégorie">
                         <label for="Catégorie">Type</label>
-                        <select id="Catégorie" name="catégorie">
+                        <select id="Catégorie" name="catégorie" v-model="type">
                             <option value="none" selected disabled hidden>Type</option>
                             <option v-for="type in types" :key="type.id_type" :value="type.id_type">{{type.nom}}</option>
                         </select>
                     </div>
                     <div class="field_couleur">
                         <label for="Couleur">Couleur</label>
-                        <select id="Couleur" name="couleur">
+                        <select id="Couleur" name="couleur" v-model="couleur">
                             <option value="none" selected disabled hidden>Couleur</option>
                             <option v-for="couleur in couleurs" :key="couleur.id_couleur" :value="couleur.id_couleur">{{couleur.nom}}</option>
                         </select>
@@ -181,17 +181,11 @@ module.exports = {
             console.log(this.isConnected)
         },
         async created(){
-            const result = await axios.get('/api/produits', {})
-            this.produits = result.data
+            const result = await axios.get('/api/types')
+            this.types = result.data
 
-            const result2 = await axios.get('/api/labels', {})
-            this.labels = result2.data
-
-            const result3 = await axios.get('/api/annonce', {})
-            this.annonces = result3.data
-
-            const result4 = await axios.get('/api/regions', {})
-            this.regions = result4.data
+            const result2 = await axios.get('/api/couleurs')
+            this.couleurs = result2.data
         },
     }
 </script>
