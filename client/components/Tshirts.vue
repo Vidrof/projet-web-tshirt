@@ -4,37 +4,22 @@
         <div id="filtres">
             <div class="caracteristiques">
                 <label for="categorie">Catégorie :</label>
-                    <select name="cat" id="cat-select">
-                        <option value="">Choississez un type de T-shirt</option>
-                        <option value="Rond">Col Rond</option>
-                        <option value="V">Col V</option>
-                        <option value="UV">Col Ultra V</option>
+                    <select v-model="selected">
+                        <option v-for="type in types" v-bind:key="type.id_type" v-bind:value="type.value">{{type.nom}}</option>                        
                     </select>
                 <label for="note">Note :</label>
-                    <select name="note" id="note-select">
-                        <option value="">Choississez une note de T-shirt</option>
-                        <option value="0+">0+</option>
-                        <option value="1+">1+</option>
-                        <option value="2+">2+</option>
-                        <option value="3+">3+</option>
-                        <option value="4+">4+</option>
-                        <option value="5">5</option>
-                    </select>
+                <select name="note" id="note-select">
+                    <option value="">Choississez une note de T-shirt</option>
+                    <option value="0+">0+</option>
+                    <option value="1+">1+</option>
+                    <option value="2+">2+</option>
+                    <option value="3+">3+</option>
+                    <option value="4+">4+</option>
+                    <option value="5">5</option>
+                </select>
                 <label for="note">Couleur :</label>
-                    <select name="note" id="note-select">
-                        <option value="">Choississez une couleur de T-shirt</option>
-                        <option value="Bleu">Bleu</option>
-                        <option value="Rouge">Rouge</option>
-                        <option value="Vert">Vert</option>
-                        <option value="Jaune">Jaune</option>
-                        <option value="Rose">Rose</option>
-                        <option value="Orange">Orange</option>
-                        <option value="Violet">Violet</option>
-                        <option value="Noir">Noir</option>
-                        <option value="Blanc">Blanc</option>
-                        <option value="Marron">Marron</option>
-                        <option value="Gris">Gris</option>
-                        <option value="Cyan">Cyan</option>
+                    <select v-model="selected">
+                        <option v-for="couleur in couleurs" v-bind:key="couleur.id_couleur" v-bind:value="couleur.value">{{couleur.nom}}</option>                        
                     </select>
                 <label for="creator-search">Chercher un créateur</label>
                         <input type="search" id="creator-search" name="q"
@@ -99,8 +84,16 @@ module.exports = {
     components : {
         Annonce
     },
-    created : function(){
-        console.log("test")
+    data () {
+        return {
+            produits: [],
+            produit: 0
+        }
+    },
+    async created(){
+        const result = await axios.get('/api/types', {})
+        const result = await axios.get('/api/couleurs', {})
+        this.produits = result.data
     }
 }
 </script>
