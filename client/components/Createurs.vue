@@ -80,8 +80,10 @@ module.exports = {
     },
     data () {
         return {
-            produits: [],
-            produit: 0
+            types: [],
+            types: 0,
+            couleurs:[],
+            types: 0
         }
     },
     async created(){

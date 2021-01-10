@@ -86,8 +86,10 @@ module.exports = {
     },
     data () {
         return {
-            produits: [],
-            produit: 0
+            types: [],
+            types: 0,
+            couleurs: [],
+            couleur: 0
         }
     },
     async created(){
