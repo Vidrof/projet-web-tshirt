@@ -56,10 +56,11 @@
                     <router-link id="home" to='/'><img class="logo" src="img/logo.jpg"></router-link>
                     <router-link to='/tshirts'>Tshirts</router-link>
                     <router-link to='/createurs'>Créateurs</router-link>
-                    <img class="logo_profil" src="./img/profil.png">
-                    <router-link to='/vente'>Vente</router-link>
+                    <img v-if="isConnected" class="logo_profil" src="./img/profil.png">
+                    <router-link v-if="isConnected" to='/vente'>Poster</router-link>
                     <router-link v-if="!isConnected" to='/log_in'>Se connecter</router-link>
                     <router-link v-if="!isConnected" to='/sign_up'>S'enregistrer</router-link>
+                    <img v-if="isConnected" class="logo_profil" src="./img/deconnexion.png" v-on:click="deconnect()">
                 </nav>
             </header>
             <main>
@@ -119,6 +120,11 @@
                         this.user = res.data
                         this.isConnected = true
                         this.$router.push('/')
+                    },
+                    async deconnect() {
+                        await axios.delete('/api/me')
+                        this.isConnected = false
+                        this.user = {}
                     }
                 }
             })
