@@ -8,7 +8,7 @@
             </div>
             <div class="description">
                 <p>{{annonce.description}}</p>
-                <p>couleur :</p>
+                <p>couleur :</p><div v-for="c in couleurs" class='couleurs'></div>
                 <p>type : {{type.nom}}</p>
             </div>
             <button @click="ouvrirTshirt()">En savoir plus</button>
@@ -77,7 +77,7 @@ module.exports = {
     props: {
         annonce: {type:Object},
         type: {type:Object},
-        couleur: {type:Array},
+        couleurs: {type:Array},
     },
     methods:{
         ouvrirTshirt(){

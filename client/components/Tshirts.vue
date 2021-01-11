@@ -29,7 +29,6 @@
         <annonce 
             :annonce="tshirt"
             :type="types[tshirt.id_type]"
-            :couleur="[]"
             v-for="tshirt in tshirts"
             v-bind:key="tshirt.id">
         </annonce>

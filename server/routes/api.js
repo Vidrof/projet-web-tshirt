@@ -187,6 +187,27 @@ router.get('/tshirt/user/:id_user', async(req, res) => {
 
   res.send(result.rows)
 })
+//récupérer les couleurs d'un tshirt
+router.get('/couleur/:id_tshirt', async(req, res) => {
+  const id_tshirt = req.params.id_tshirt
+
+  const result = await client.query({
+    text : `SELECT * FROM couleur_tshirt
+    JOIN couleurs
+    ON couleur_tshirt.id_couleur = couleurs.id_couleur
+    WHERE id_tshirt = $1`,
+    values: [id_tshirt]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'this user do not have any tshirt'
+    })
+    return
+  }
+
+  res.send(result.rows)
+})
 
 // poster un avis
 router.post('/avis', async (req, res) => {
