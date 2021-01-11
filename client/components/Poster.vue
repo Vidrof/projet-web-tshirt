@@ -68,26 +68,6 @@
             </form>
         </div>
         <hr>
-        <div class="mes_produits">
-            <h2>Mes produits en vente</h2>
-            <div class="produits_en_vente">
-                <div>
-                    <div class="produit_en_vente">
-                    </div>
-                    <p>Produit1</p>
-                </div>
-                <div>
-                    <div class="produit_en_vente">
-                    </div>
-                    <p>Produit2</p>
-                </div>
-                                <div>
-                    <div class="produit_en_vente">
-                    </div>
-                    <p>Produit3</p>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -187,7 +167,10 @@
 </style>
 
 <script>
-module.exports = {
+    module.exports = {
+        props: {
+            isConnected: { type: Boolean }
+        },
         data () {
             return {
                 types: [],
@@ -213,15 +196,17 @@ module.exports = {
                 console.log(e.target.files[0])
             },
             async addTshirt(){
-                this.success = 1
-                await axios.post('/api/tshirt', {
-                    description: this.description,
-                    titre: this.titre,
-                    id_type: this.type,
-                    couleurs: [this.couleur1, this.couleur2, this.couleur3]
-                }).catch(function (error) {
-                    this.success = 0  
-                })
+                if(isConnected && this.type!==0 && this.couleur1!==0 && this.couleur2!==0 && this.couleur3!==0){
+                    this.success = 1
+                    await axios.post('/api/tshirt', {
+                        description: this.description,
+                        titre: this.titre,
+                        id_type: this.type,
+                        couleurs: [this.couleur1, this.couleur2, this.couleur3]
+                    }).catch(function (error) {
+                        this.success = 0  
+                    })
+                }
             }
         }
     }

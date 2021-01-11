@@ -15,9 +15,9 @@
                 <p> Des créateurs de talents, et des T-shirts d'exceptions !</p>
             </div>
             <div class="images-du-mois">
-                <img id="img1" src="./img/logo.jpg" alt="image de tshirt">
-                <img id="img2" src="./img/logo.jpg" alt="image de tshirt">
-                <img id="img3" src="./img/logo.jpg" alt="image de tshirt">
+                <img id="img1" src="./img/tshirtblanc.jpg" alt="image de tshirt">
+                <img id="img2" src="./img/tshirtnoir.jpg" alt="image de tshirt">
+                <img id="img3" src="./img/tshirtjaune.jpg" alt="image de tshirt">
             </div>
         </div>
     </div>

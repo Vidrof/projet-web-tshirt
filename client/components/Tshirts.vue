@@ -102,6 +102,7 @@ module.exports = {
     async created(){
         const result = await axios.get('/api/types')
         this.types = result.data
+        
 
         const result2 = await axios.get('/api/couleurs')
         this.couleurs = result2.data
@@ -117,7 +118,6 @@ module.exports = {
             var tshirt_tmp=[]
 
             for(var tshirt of this.tshirts){
-                console.log(tshirt)
                 var ok = true
                 if(this.type!==0){
                     if(tshirt.id_type!==this.type){
@@ -126,9 +126,7 @@ module.exports = {
                 }
                 const result2 = await axios.get('/api/couleur/tshirt/'+tshirt.id_tshirt)
                 var couleurs = result2.data
-                console.log(this.couleur)
                 if(this.couleur!==0){
-                    console.log(couleurs.find(x => x.id_couleur === this.couleur))
                     if(typeof couleurs.find(x => x.id_couleur === this.couleur) === 'undefined'){
                         ok=false
                     }

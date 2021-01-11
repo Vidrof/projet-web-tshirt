@@ -250,7 +250,23 @@ router.get('/avis/tshirt/:id_tshirt', async(req, res) => {
   const id_tshirt = req.params.id_tshirt
 
   const result = await client.query({
-    text : 'SELECT * from avis WHERE id_tshirt=$1',
+    text : `SELECT  * from avis
+      JOIN users
+      ON avis.id_user = users.id_user
+      WHERE id_tshirt=$1`,
+    values: [id_tshirt]
+  })
+
+  res.send(result.rows)
+})
+
+router.get('/average/avis/tshirt/:id_tshirt', async(req, res) => {
+  const id_tshirt = req.params.id_tshirt
+
+  const result = await client.query({
+    text : `SELECT AVG(note)
+    FROM avis
+    WHERE avis.id_tshirt=$1`,
     values: [id_tshirt]
   })
 
@@ -261,7 +277,7 @@ router.get('/avis/tshirt/:id_tshirt', async(req, res) => {
     return
   }
 
-  res.send(result.rows)
+  res.send(result.rows[0])
 })
 
 //recupérer les avis posté par un user

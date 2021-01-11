@@ -96,7 +96,6 @@ module.exports = {
     async created(){
         const result = await axios.get('/api/couleur/tshirt/'+this.un_tshirt.id_tshirt)
         this.couleurs = result.data
-        console.log(this.couleurs)
     },
     methods:{
         ouvrirTshirt(){

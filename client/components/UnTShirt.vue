@@ -238,7 +238,7 @@
             return {
                 types: {},
                 tshirt: {},
-                id: 11,
+                id: this.$route.query.id_tshirt,
                 titre: "",
                 contenu: "",
                 avis:{},
@@ -258,23 +258,23 @@
 
             const result3 = await axios.get('/api/avis/tshirt/'+this.id)
             this.avis = result3.data
-            console.log(result3)
 
             const result4 = await axios.get('/api/couleur/tshirt/'+this.id)
             this.couleur = result4.data
-            console.log(result4)
 
             const result5 = await axios.get('/api/users/'+ this.tshirt.id_user)
             this.users = result5.data
-            console.log(result5)
 
             const result6 = await axios.get('/api/average/avis/tshirt/'+this.id)
             var avg = result6.data.avg
-            this.average_avis = avg.slice(0, 3)
+            if(avg === null){
+                this.average_avis = "0.00"
+            }else{
+                this.average_avis = avg.slice(0, 3)
+            }
         },
         methods: {
                 async posterAvis() {
-                    console.log(this.isConnected)
                     if(this.isConnected && this.contenu!=="" && this.titre!=="" && this.note!==0){
                         const result = await axios.post('/api/avis', {
                             note: this.note,
@@ -284,8 +284,6 @@
                         }).catch(function (error) {
                             console.log(error.response.data)
                         })
-                    }else{
-                        console.log('error')
                     }
                 },
                 setNote(note){
@@ -301,7 +299,6 @@
                 async getUsername(id_user){
                     const result = await axios.get('/api/users/'+id_user)
                     user = result.data
-                    console.log(user)
                     return user.pseudo
                 },
                 isEmptyCommentaire(note, position){
