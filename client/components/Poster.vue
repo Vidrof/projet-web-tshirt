@@ -21,21 +21,21 @@
                     </div>
                     <div class="field_couleur1">
                         <label for="Couleur1">Couleur principale:</label>
-                        <select id="Couleur1" name="couleur1" v-model="couleur">
+                        <select id="Couleur1" name="couleur1" v-model="couleur1">
                             <option value="none" selected disabled hidden>Couleur principale</option>
                             <option v-for="couleur in couleurs" :key="couleur.id_couleur" :value="couleur.id_couleur">{{couleur.nom}}</option>
                         </select>
                     </div>
                     <div class="field_couleur2">
                         <label for="Couleur2">Couleur secondaire :</label>
-                        <select id="Couleur2" name="couleur2" v-model="couleur">
+                        <select id="Couleur2" name="couleur2" v-model="couleur2">
                             <option value="none" selected disabled hidden>Couleur secondaire</option>
                             <option v-for="couleur in couleurs" :key="couleur.id_couleur" :value="couleur.id_couleur">{{couleur.nom}}</option>
                         </select>
                     </div>
                     <div class="field_couleur3">
                         <label for="Couleur3">Couleur tertiaire:</label>
-                        <select id="Couleur3" name="couleur3" v-model="couleur">
+                        <select id="Couleur3" name="couleur3" v-model="couleur3">
                             <option value="none" selected disabled hidden>Couleur tertiaire</option>
                             <option v-for="couleur in couleurs" :key="couleur.id_couleur" :value="couleur.id_couleur">{{couleur.nom}}</option>
                         </select>
@@ -193,7 +193,9 @@ module.exports = {
                 types: [],
                 type: 0,
                 couleurs: [],
-                couleur: 0,
+                couleur1: 0,
+                couleur2: 0,
+                couleur3: 0,
                 titre: "",
                 description: "",
                 success: -1
@@ -204,13 +206,7 @@ module.exports = {
             this.types = result.data
 
             const result2 = await axios.get('/api/couleurs')
-            this.couleur1 = result2.data
-
-            const result3 = await axios.get('/api/couleurs')
-            this.couleur2 = result3.data
-
-            const result4 = await axios.get('/api/couleurs')
-            this.couleur3 = result4.data
+            this.couleurs = result2.data
         },
         methods: {
             processFile(e) {
