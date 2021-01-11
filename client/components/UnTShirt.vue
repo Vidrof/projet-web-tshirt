@@ -4,7 +4,7 @@
         <div id="titre_note">
             <h2 id="titre_annonce"> {{tshirt.titre}}</h2>
             <div class="note_créateur">
-                <h3>4.2 </h3><img class="star" src="img/star.png" alt="little star">
+                <h3>{{average_avis}} </h3><img class="star" src="img/star.png" alt="little star">
             </div>
         </div>
         <div class="créateur">
@@ -16,7 +16,7 @@
                 <h3>Type de T-shirt :</h3> {{types.nom}}
             </div>
             <div class="couleur">
-                <h3 lcass="titre couleur">Couleur du T-shirt:</h3> <p class="text_couleur" v-for="c in couleur" :key="c.id_couleur"> {{c.nom}}</p>
+                <h3 class="titre couleur">Couleur du T-shirt:</h3> <p class="text_couleur" v-for="c in couleur" :key="c.id_couleur"> {{c.nom}}</p>
             </div>
         </div>
         <hr>
@@ -26,42 +26,6 @@
         </div>
         <hr>
         <div class="row">
-            <div id="notes">
-                <h3 class="titre">Avis :</h3>
-                <div id="moyenne">
-                    <img class="star" src="img/star.png">
-                    <img class="star" src="img/star.png">
-                    <img class="star" src="img/star.png">
-                    <img class="star" src="img/star.png">
-                    <img class="star" src="img/star.png">
-                    <p>4,2 sur 5</p>
-                </div>
-                <div class="pourcentage">
-                    <p>5 étoiles</p>
-                    <div class="barre"></div>
-                    <p>81%</p>
-                </div>
-                <div class="pourcentage">
-                    <p>4 étoiles</p>
-                    <div class="barre"></div>
-                    <p>81%</p>
-                </div>
-                <div class="pourcentage">
-                    <p>3 étoiles</p>
-                    <div class="barre"></div>
-                    <p>81%</p>
-                </div>
-                <div class="pourcentage">
-                    <p>2 étoiles</p>
-                    <div class="barre"></div>
-                    <p>81%</p>
-                </div>
-                <div class="pourcentage">
-                    <p>1 étoiles</p>
-                    <div class="barre"></div>
-                    <p>81%</p>
-                </div>
-            </div>
             <div id="avis">
                 <div id="form_avis">
                     <div id="note">
@@ -75,11 +39,11 @@
                     <textarea id="description_form" type="text" placeholder="Description" v-model="contenu"></textarea>
                     <button @click="posterAvis">Poster l'avis</button>
                 </div>
-                <div id="commentaire">
+                <div v-for="avi in avis" :key="avi.id_avis" class="commentaire">
                     <div id="user_note">
                         <div class="user_commentaire">
                             <img src="./img/user.png" alt="">
-                            <p>{{getUsername(avi.id_user)}}</p>
+                            <p>{{avi.pseudo}}</p>
                         </div>
                         <div id="note">
                             <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 1)">
@@ -272,9 +236,9 @@
         },
         data () {
             return {
-                type: {},
+                types: {},
                 tshirt: {},
-                id: 1,
+                id: 11,
                 titre: "",
                 contenu: "",
                 avis:{},
@@ -282,16 +246,15 @@
                 couleur: {},
                 type: {},
                 users: {},
+                average_avis: ''
             }
         },
         async created(){
-            const result = await axios.get('/api/types/'+this.id)
-            this.types = result.data
-            console.log(result)
-
             const result2 = await axios.get('/api/tshirt/'+this.id)
             this.tshirt = result2.data
-            console.log(result2)
+
+            const result = await axios.get('/api/types/'+this.tshirt.id_type)
+            this.types = result.data
 
             const result3 = await axios.get('/api/avis/tshirt/'+this.id)
             this.avis = result3.data
@@ -305,10 +268,9 @@
             this.users = result5.data
             console.log(result5)
 
-            const result6 = await axios.get('/api/users/'+ this.avis.id_user)
-            this.users = result6.data
-            console.log(result6)
-
+            const result6 = await axios.get('/api/average/avis/tshirt/'+this.id)
+            var avg = result6.data.avg
+            this.average_avis = avg.slice(0, 3)
         },
         methods: {
                 async posterAvis() {

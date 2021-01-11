@@ -1,0 +1,299 @@
+<template>
+    <div>
+        <div id="body">
+            <img id="image_annonce" src="./img/young1pact.jpeg">
+            <div id="titre_note">
+                <h2 id="titre_annonce">{{tshirt.titre}}</h2>
+                <div class="note">
+                    <h3>{{average_avis}} </h3><img class="star" src="img/star.png" alt="little star">
+                </div>
+            </div>
+            <p>11/12/2020</p>
+            <hr>
+            <h3>Type de t-shirt :</h3>{{tshirt.type}}
+            <h3>Couleur(s) du t-shirt:</h3>{{tshirt.couleur}}
+            <hr>
+            <h3 class="titre">Description :</h3>
+            <p id="description">{{tshirt.description}}</p>
+            <hr>
+            <div class="row">
+                <div id="notes">
+                    <h3 class="titre">Avis :</h3>
+                    <div id="moyenne">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <img class="star" src="img/star.png">
+                        <p>4,2 sur 5</p>
+                    </div>
+                    <div class="pourcentage">
+                        <p>5 étoiles</p>
+                        <div class="barre"></div>
+                        <p>81%</p>
+                    </div>
+                    <div class="pourcentage">
+                        <p>4 étoiles</p>
+                        <div class="barre"></div>
+                        <p>81%</p>
+                    </div>
+                    <div class="pourcentage">
+                        <p>3 étoiles</p>
+                        <div class="barre"></div>
+                        <p>81%</p>
+                    </div>
+                    <div class="pourcentage">
+                        <p>2 étoiles</p>
+                        <div class="barre"></div>
+                        <p>81%</p>
+                    </div>
+                    <div class="pourcentage">
+                        <p>1 étoiles</p>
+                        <div class="barre"></div>
+                        <p>81%</p>
+                    </div>
+                </div>
+                <div id="commentaires">
+                    <div id="form_commentaire">
+                        <div id="stars">
+                            <img @click="setNote(1)" class="clickable star" :src="'img/'+isEmpty(1)">
+                            <img @click="setNote(2)" class="clickable star" :src="'img/'+isEmpty(2)">
+                            <img @click="setNote(3)" class="clickable star" :src="'img/'+isEmpty(3)">
+                            <img @click="setNote(4)" class="clickable star" :src="'img/'+isEmpty(4)">
+                            <img @click="setNote(5)" class="clickable star" :src="'img/'+isEmpty(5)">
+                        </div>
+                        <input id="titre_form" type="text" placeholder="Titre" v-model="titre">
+                        <textarea id="description_form" type="text" placeholder="Description" v-model="contenu"></textarea>
+                        <button @click="posterAvis">Poster l'avis</button>
+                    </div>
+                    <div v-for="avi in avis" :key="avi.id_avis" class="commentaire">
+                        <div class="profil">
+                            <img src="./img/logo.jpg" alt="">
+                            <p>{{avi.pseudo}}</p>
+                        </div>
+                        <div id="stars">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 1)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 2)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 3)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 4)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 5)">
+                            <h4>{{avi.titre}}</h4>
+                        </div>
+                        <p>{{avi.contenu}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+.clickable{
+    cursor: pointer;
+}
+hr{
+    border: 1px solid #9C9C9C;
+}
+.commentaire h4{
+    margin-bottom: 10px;
+}
+.commentaire p{
+    font-weight: 300;
+}
+.profil{
+    display: flex;
+    flex-direction: row;
+    line-height: 50px;
+    margin-bottom: 10px;
+}
+.profil img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.profil p{
+    margin-left: 20px;
+    width: max-content;
+}
+.commentaire{
+    box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+#form_commentaire button{
+    background-color: #4D74FF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+}
+#form_commentaire button:hover{
+    background-color: #416aff;
+}
+#form_commentaire button:active{
+    background-color: #416aff;
+    box-shadow: inset 20px 20px 60px #375ad9, 
+        inset -20px -20px 60px #4b7aff;
+}
+#titre_form{
+    margin: 10px 0;
+    border: 1px solid #D1D1D1;
+    padding: 10px;
+}
+#description_form{
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #D1D1D1;
+    height: 200px;
+    resize: vertical;
+}
+#commentaires{
+    padding-left: 20px;
+    width: 480px;
+}
+#form_commentaire{
+    box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+#description{
+    font-weight: 300;
+}
+.pourcentage{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+.pourcentage .barre{
+    width: 150px;
+    margin: 0 5px;
+    background-color: rgb(255, 174, 0);
+}
+#notes{
+    width: 300px;
+}
+#moyenne{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+#moyenne p{
+    line-height: 30px;
+    margin-left: 10px;
+}
+#body{
+    width: 800px;
+    margin: 0 auto;
+}
+#image_annonce{
+    object-fit: cover;
+    width: 800px;
+    height: 350px;
+    border-radius: 17px;
+    margin: 20px 0;
+}
+#titre_annonce{
+    width: max-content;
+    margin-bottom: 10px;
+}
+.note{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+.note h3{
+    width: min-content;
+    line-height: 30px;
+    margin-right: 5px;
+}
+.star{
+    height: 30px;
+    width: 30px;
+}
+#titre_note{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+hr{
+    margin: 20px 0;
+}
+.titre{
+    margin-bottom: 10px;
+}
+</style>
+
+<script>
+    module.exports = {
+        props: {
+            isConnected: { type: Boolean }
+        },
+        data () {
+            return {
+                type: {},
+                tshirt: {},
+                id: 11,
+                titre: "",
+                contenu: "",
+                avis:[],
+                note: 0,
+                average_avis:''
+            }
+        },
+        async created(){
+            const result = await axios.get('/api/types')
+            this.types = result.data
+
+            const result2 = await axios.get('/api/tshirt/'+this.id)
+            this.tshirt = result2.data
+            console.log(result2)
+
+            const result3 = await axios.get('/api/avis/tshirt/'+this.id)
+            this.avis = result3.data
+
+            const result4 = await axios.get('/api/average/avis/tshirt/'+this.id)
+            var avg = result4.data.avg
+            this.average_avis = avg.slice(0, 3)
+        },
+        methods: {
+            async posterAvis() {
+                console.log(this.isConnected)
+                if(this.isConnected && this.contenu!=="" && this.titre!=="" && this.note!==0){
+                    const result = await axios.post('/api/avis', {
+                        note: this.note,
+                        contenu: this.contenu,
+                        titre: this.titre,
+                        id_tshirt: this.id
+                    }).catch(function (error) {
+                        console.log(error.response.data)
+                    })
+                }else{
+                    console.log('error')
+                }
+            },
+            setNote(note){
+                this.note = note
+            },
+            isEmpty(note){
+                if(note>this.note){
+                    return 'star_none.png'
+                }else{
+                    return 'star.png'
+                }
+            },
+            isEmptyCommentaire(note, position){
+                if(position>note){
+                    return 'star_none.png'
+                }else{
+                    return 'star.png'
+                }
+            }
+        }
+    }
+</script>
