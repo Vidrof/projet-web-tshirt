@@ -4,8 +4,8 @@
         <div id="filtres">
             <div class="caracteristiques">
                 <label for="categorie">Catégorie :</label>
-                    <select v-model="selected">
-                        <option v-for="type in types" v-bind:key="type.id_type" v-bind:value="type.value">{{type.nom}}</option>                        
+                    <select v-model="type">
+                        <option v-for="type in types" v-bind:key="type.id_type" v-bind:value="type.id_type">{{type.nom}}</option>                        
                     </select>
                 <label for="note">Note :</label>
                 <select name="note" id="note-select">
@@ -18,17 +18,18 @@
                     <option value="5">5</option>
                 </select>
                 <label for="note">Couleur :</label>
-                    <select v-model="selected">
-                        <option v-for="couleur in couleurs" v-bind:key="couleur.id_couleur" v-bind:value="couleur.value">{{couleur.nom}}</option>                        
+                    <select v-model="couleur">
+                        <option v-for="couleur in couleurs" v-bind:key="couleur.id_couleur" v-bind:value="couleur.id_couleur">{{couleur.nom}}</option>                        
                     </select>
                 <label for="creator-search">Chercher un créateur</label>
-                        <input type="search" id="creator-search" name="q"
-                         aria-label="Rechercher un createur particulier">
+                <input v-model="createur" type="search" id="creator-search" name="q" aria-label="Rechercher un createur particulier">
             </div>
-            <button>Recherche</button>
+            <button @click="refreshTshirts()">Recherche</button>
         </div>
         <annonce 
             :annonce="tshirt"
+            :type="types[tshirt.id_type]"
+            :couleur="[]"
             v-for="tshirt in tshirts"
             v-bind:key="tshirt.id">
         </annonce>
@@ -95,7 +96,8 @@ module.exports = {
             couleurs: [],
             couleur: 0,
             tshirts: [],
-            tshirt:0
+            tshirt:0,
+            createur: ""
         }
     },
     async created(){
@@ -107,7 +109,34 @@ module.exports = {
 
         const result3 = await axios.get('/api/tshirt')
         this.tshirts = result3.data
-        console.log(result3)
+    },
+    methods:{
+        async refreshTshirts(){
+            console.log(this.type)
+            console.log(this.couleur)
+            const result = await axios.get('/api/tshirt')
+            this.tshirts = result.data
+
+            var tshirt_tmp=[]
+            this.tshirts.forEach(tshirt => {
+                console.log(tshirt)
+                var ok = true
+                if(this.type!==0){
+                    if(tshirt.id_type!==this.type){
+                        ok=false
+                    }
+                }
+                if(this.couleur!==0){
+                    if(tshirt.id_couleur!==this.couleur){
+                        ok=false
+                    }
+                }
+                if(ok){
+                    tshirt_tmp.push(tshirt)
+                }
+            })
+            this.tshirts=tshirt_tmp
+        }
     }
 }
 </script>

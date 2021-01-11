@@ -152,7 +152,7 @@ router.get('/tshirt', async(req, res) => {
   res.send(result.rows)
 })
 
-router.get('tshirt/:id_tshirt', async(req, res) => {
+router.get('/tshirt/:id_tshirt', async(req, res) => {
   const id_tshirt = req.params.id_tshirt
 
   const result = await client.query({
@@ -170,7 +170,7 @@ router.get('tshirt/:id_tshirt', async(req, res) => {
   res.send(result.rows[0])
 })
 //récuperer les tshirt lié à un user
-router.get('tshirt/user/:id_user', async(req, res) => {
+router.get('/tshirt/user/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 
   const result = await client.query({
@@ -225,7 +225,7 @@ router.post('/avis', async (req, res) => {
 })
 
 //recupérer les avis d'un tshirt
-router.get('avis/tshirt/:id_tshirt', async(req, res) => {
+router.get('/avis/tshirt/:id_tshirt', async(req, res) => {
   const id_tshirt = req.params.id_tshirt
 
   const result = await client.query({
@@ -244,7 +244,7 @@ router.get('avis/tshirt/:id_tshirt', async(req, res) => {
 })
 
 //recupérer les avis posté par un user
-router.get('avis/user/:id_user', async(req, res) => {
+router.get('/avis/user/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 
   const result = await client.query({
@@ -365,7 +365,7 @@ router.post('/tshirt', async (req, res) => {
   res.send('ok')
 })
 
-router.get('users/:id_user', async(req, res) => {
+router.get('/users/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 
   const result = await client.query({
@@ -382,4 +382,5 @@ router.get('users/:id_user', async(req, res) => {
 
   res.send(result.rows[0])
 })
+
 module.exports = router

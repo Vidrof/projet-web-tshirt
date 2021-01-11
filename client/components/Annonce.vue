@@ -8,8 +8,10 @@
             </div>
             <div class="description">
                 <p>{{annonce.description}}</p>
+                <p>couleur :</p>
+                <p>type : {{type.nom}}</p>
             </div>
-            <button>En savoir plus</button>
+            <button @click="ouvrirTshirt()">En savoir plus</button>
         </div>
     </div>
 </template>
@@ -32,24 +34,29 @@
     .texte{
         display: flex;
         flex-direction: column;
+        width: 450px;
     }
     .texte .titre{
         display: flex;
         flex-direction: row;
     }
     .titre #titre_annonce{
-        margin: 20px auto;
+        margin: 20px 0;
+        width: 400px;
+        text-align: center;
+    }
+    .note{
+        display: flex;
+        flex-direction: row;
     }
     .note h3{
         width: min-content;
-        margin-left: 220px;
         margin-top: 21px;
     }
     .star{
         height: 30px;
         width: 30px;
-        margin-left:250px;
-        margin-top: -28px;
+        margin-top: 15px;
     }
     .description{
         margin: 30px 30px;
@@ -69,6 +76,13 @@ module.exports = {
     name:"Annonce",
     props: {
         annonce: {type:Object},
-}
+        type: {type:Object},
+        couleur: {type:Array},
+    },
+    methods:{
+        ouvrirTshirt(){
+            this.$router.push('/un_tshirt/?id_tshirt='+this.annonce.id_tshirt)
+        }
+    }
 }
 </script>
