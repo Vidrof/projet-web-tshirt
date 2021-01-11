@@ -4,7 +4,7 @@
             <h1>Bienvenue sur le site T-shirt Time !</h1>
             <p class="texte-accueil">
                 Notre site a pour vocation de réveiller des vocations.<br> 
-                Ici, vous pourrez poster vos créations de Tshirts, consultez celles des autres et interagir avec leur auteurs !
+                Ici, vous pourrez poster vos créations de T-shirts, consultez celles des autres et interagir avec leur auteurs !
             </p> 
         </div>
         <div class="carre-noir">
