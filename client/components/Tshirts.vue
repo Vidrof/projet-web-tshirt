@@ -7,22 +7,10 @@
                     <select v-model="type">
                         <option v-for="type in types" v-bind:key="type.id_type" v-bind:value="type.id_type">{{type.nom}}</option>                        
                     </select>
-                <label for="note">Note :</label>
-                <select name="note" id="note-select">
-                    <option value="">Choississez une note de T-shirt</option>
-                    <option value="0+">0+</option>
-                    <option value="1+">1+</option>
-                    <option value="2+">2+</option>
-                    <option value="3+">3+</option>
-                    <option value="4+">4+</option>
-                    <option value="5">5</option>
-                </select>
                 <label for="note">Couleur :</label>
                     <select v-model="couleur">
                         <option v-for="couleur in couleurs" v-bind:key="couleur.id_couleur" v-bind:value="couleur.id_couleur">{{couleur.nom}}</option>                        
                     </select>
-                <label for="creator-search">Chercher un créateur</label>
-                <input v-model="createur" type="search" id="creator-search" name="q" aria-label="Rechercher un createur particulier">
             </div>
             <button @click="refreshTshirts()">Recherche</button>
         </div>
