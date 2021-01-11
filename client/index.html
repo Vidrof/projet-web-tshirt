@@ -56,7 +56,6 @@
                 <nav>
                     <router-link id="home" to='/'><img class="logo" src="img/accueil.png"></router-link>
                     <router-link to='/tshirts'>Tshirts</router-link>
-                    <router-link to='/createurs'>Créateurs</router-link>
                     <img v-if="isConnected" class="logo_profil" src="img/profil.png">
                     <router-link v-if="isConnected" to='/vente'>Poster</router-link>
                     <router-link v-if="!isConnected" to='/log_in'>Se connecter</router-link>
@@ -79,7 +78,6 @@
             const Sign_up = window.httpVueLoader('./components/Sign_up.vue')
             const Vente = window.httpVueLoader('./components/Vente.vue')
             const Log_in = window.httpVueLoader('./components/Log_in.vue')
-            const Createurs = window.httpVueLoader('./components/Createurs.vue')
 
             const routes = [
                 { path: '/', component: Acceuil, meta: {title: 'Accueil'} },
@@ -89,7 +87,6 @@
                 { path: '/sign_up', component: Sign_up, meta: {title: 'S\'enregistrer'}},
                 { path: '/log_in', component: Log_in, meta :{title: 'Se connecter'}},
                 { path: '/vente', component: Vente, meta: {title: 'Vente'}},
-                { path: '/createurs', component: Createurs, meta: {title: 'Créateurs'}}
             ]
             const router = new VueRouter({
                 routes
