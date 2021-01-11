@@ -60,7 +60,7 @@
                 <div>
                     <div class="produit_en_vente">
                     </div>
-                    <p>Produit2</p>
+                    <p>Produit1</p>
                 </div>
                 <div>
                     <div class="produit_en_vente">
