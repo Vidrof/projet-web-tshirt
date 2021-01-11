@@ -3,11 +3,11 @@
         <img class="tshirt_img" src="img/logo.jpg" alt="tshirt image">
         <div class="texte">
             <div class="titre">
-                <h3 id="titre_annonce">Tshirt de qualité</h3>
+                <h3 id="titre_annonce">{{annonce.titre}}</h3>
                 <div class="note"><h3>4.2 </h3><img class="star" src="img/star.svg" alt="little star"></div>
             </div>
             <div class="description">
-                <p>{{annonce.titre}}</p>
+                <p>{{annonce.description}}</p>
             </div>
             <button>En savoir plus</button>
         </div>
@@ -40,18 +40,16 @@
     .titre #titre_annonce{
         margin: 20px auto;
     }
-    .note{
-        display: flex;
-        flex-direction: row;
-        float: left;
-        margin: auto 0;
-    }
     .note h3{
         width: min-content;
+        margin-left: 220px;
+        margin-top: 21px;
     }
     .star{
         height: 30px;
         width: 30px;
+        margin-left:250px;
+        margin-top: -28px;
     }
     .description{
         margin: 30px 30px;
