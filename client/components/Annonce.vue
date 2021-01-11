@@ -3,11 +3,11 @@
         <img class="tshirt_img" src="img/logo.jpg" alt="tshirt image">
         <div class="texte">
             <div class="titre">
-                <h3 id="titre_annonce">{{annonce.titre}}</h3>
+                <h3 id="titre_annonce">{{un_tshirt.titre}}</h3>
                 <div class="note"><h3>4.2 </h3><img class="star" src="img/star.svg" alt="little star"></div>
             </div>
             <div class="description">
-                <p>{{annonce.description}}</p>
+                <p>{{un_tshirt.description}}</p>
                 <p>couleur :</p><div v-for="c in couleurs" class='couleurs'></div>
                 <p>type : {{type.nom}}</p>
             </div>
@@ -74,14 +74,26 @@
 <script>
 module.exports = {
     name:"Annonce",
+    data () {
+        return {
+            couleurs: []
+        }
+    },
     props: {
-        annonce: {type:Object},
+        un_tshirt: {type:Object},
         type: {type:Object},
-        couleurs: {type:Array},
+    },
+    async created(){
+        console.log(this.un_tshirt)
+
+        const result = await axios.get('/api/types')
+        this.couleurs = result.data
+        
+        console.log(this.couleurs)
     },
     methods:{
         ouvrirTshirt(){
-            this.$router.push('/un_tshirt/?id_tshirt='+this.annonce.id_tshirt)
+            this.$router.push('/un_tshirt/?id_tshirt='+this.un_tshirt.id_tshirt)
         }
     }
 }

@@ -188,7 +188,7 @@ router.get('/tshirt/user/:id_user', async(req, res) => {
   res.send(result.rows)
 })
 //récupérer les couleurs d'un tshirt
-router.get('/couleur/:id_tshirt', async(req, res) => {
+router.get('/couleur/tshirt/:id_tshirt', async(req, res) => {
   const id_tshirt = req.params.id_tshirt
 
   const result = await client.query({

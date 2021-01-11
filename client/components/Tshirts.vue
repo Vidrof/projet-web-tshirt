@@ -27,7 +27,7 @@
             <button @click="refreshTshirts()">Recherche</button>
         </div>
         <annonce 
-            :annonce="tshirt"
+            :un_tshirt="tshirt"
             :type="types[tshirt.id_type]"
             v-for="tshirt in tshirts"
             v-bind:key="tshirt.id">
