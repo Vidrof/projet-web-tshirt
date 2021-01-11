@@ -170,7 +170,7 @@ router.get('tshirt/:id_tshirt', async(req, res) => {
   res.send(result.rows[0])
 })
 //récuperer les tshirt lié à un user
-router.get('tshirt/:id_user', async(req, res) => {
+router.get('tshirt/user/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 
   const result = await client.query({
@@ -225,7 +225,7 @@ router.post('/avis', async (req, res) => {
 })
 
 //recupérer les avis d'un tshirt
-router.get('avis/:id_tshirt', async(req, res) => {
+router.get('avis/tshirt/:id_tshirt', async(req, res) => {
   const id_tshirt = req.params.id_tshirt
 
   const result = await client.query({
@@ -244,7 +244,7 @@ router.get('avis/:id_tshirt', async(req, res) => {
 })
 
 //recupérer les avis posté par un user
-router.get('avis/:id_user', async(req, res) => {
+router.get('avis/user/:id_user', async(req, res) => {
   const id_user = req.params.id_user
 
   const result = await client.query({
@@ -363,5 +363,23 @@ router.post('/tshirt', async (req, res) => {
   }
 
   res.send('ok')
+})
+
+router.get('users/:id_user', async(req, res) => {
+  const id_user = req.params.id_user
+
+  const result = await client.query({
+    text : 'SELECT * from users WHERE id_user=$1',
+    values: [id_user]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'this user does not exist'
+    })
+    return
+  }
+
+  res.send(result.rows[0])
 })
 module.exports = router

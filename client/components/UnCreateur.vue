@@ -209,4 +209,21 @@ hr{
 }
 </style>
 <script>
+    module.exports = {
+        data () {
+            return {
+                user: {}
+            }
+        },
+        async mounted () {
+        },
+        async created(){
+            console.log(this.$route.query.id_user)
+            const result = await axios.get('/api/users/' + this.$route.query.id_user)
+            this.user = result.data
+            
+        },
+        methods: {
+        }
+    }
 </script>
