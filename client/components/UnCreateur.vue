@@ -3,7 +3,7 @@
         <div id="body">
             <img id="image_annonce" src="./img/logo.jpg">
             <div id="titre_note">
-                <h2 id="titre_annonce">ClémentDuGhetto</h2>
+                <h2 id="titre_annonce">{{user.pseudo}}</h2>
                 <div class="note">
                     <h3>4.2 </h3><img class="star" src="img/star.png" alt="little star">
                 </div>
@@ -11,24 +11,13 @@
             <p>11/12/2020</p>
             <hr>
             <h3 class="titre">Description :</h3>
-            <p id="description">On a vesqui les keufs pas les meufs tavu</p>
+            <p id="description">{{user.description}}</p>
             <hr>
             <h3 class="titre">Ses création :</h3>
             <div id="creations">
-                <div class="creation">
-                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts">
-                </div>
-                <div class="creation">
-                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts">
-                </div>
-                <div class="creation">
-                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts">
-                </div>
-                <div class="creation">
-                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts">
-                </div>
-                <div class="creation">
-                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts">
+                <div v-for="creation in creations" :key="creation.id_tshirt" class="creation">
+                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts" @click="ouvrirTshirt(creation.id_tshirt)">
+                    <h3>{{creation.titre}}</h3>
                 </div>
             </div>
         </div>
@@ -40,6 +29,7 @@
     width: 800px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .creation{
     margin: 10px;
@@ -49,6 +39,9 @@
 }
 .creation img{
     width: 200px;
+}
+.creation h3{
+    text-align: center;
 }
 .creation img:hover{
     width: 200px;
@@ -212,18 +205,24 @@ hr{
     module.exports = {
         data () {
             return {
-                user: {}
+                user: {},
+                creations: []
             }
         },
         async mounted () {
         },
         async created(){
-            console.log(this.$route.query.id_user)
             const result = await axios.get('/api/users/' + this.$route.query.id_user)
             this.user = result.data
-            
+
+            const result2 = await axios.get('api/tshirt/user/' + this.user.id_user)
+            this.creations = result2.data
+
         },
         methods: {
+            ouvrirTshirt(id_tshirt){
+                this.$router.push('/un_tshirt/?id_tshirt='+id_tshirt)
+            }
         }
     }
 </script>

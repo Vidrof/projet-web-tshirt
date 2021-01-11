@@ -56,11 +56,11 @@
                 <div id="commentaires">
                     <div id="form_commentaire">
                         <div id="stars">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
+                            <img class="clickable" @click="setNote(1)" class="star" src="img/star.png">
+                            <img @click="setNote(2)" class="star" src="img/star.png">
+                            <img @click="setNote(3)" class="star" src="img/star.png">
+                            <img @click="setNote(4)" class="star" src="img/star.png">
+                            <img @click="setNote(5)" class="star" src="img/star.png">
                         </div>
                         <input id="titre_form" type="text" placeholder="Titre" v-model="titre">
                         <textarea id="description_form" type="text" placeholder="Description" v-model="contenu"></textarea>
@@ -88,6 +88,9 @@
 </template>
 
 <style scoped>
+.clickable{
+    cursor: pointer;
+}
 hr{
     border: 1px solid #9C9C9C;
 }
@@ -235,20 +238,22 @@ hr{
             return {
                 type: {},
                 tshirt: {},
-                id: '1',
+                id: 11,
                 titre: "",
                 contenu: "",
+                avis:{},
+                note: 0
             }
         },
         async created(){
             const result = await axios.get('/api/types')
             this.types = result.data
 
-            const result2 = await axios.get('/api/tshirt/')
+            const result2 = await axios.get('/api/tshirt/'+this.id)
             this.tshirt = result2.data
             console.log(result2)
 
-            const result3 = await axios.get('api/avis/tshirt')
+            const result3 = await axios.get('/api/avis/tshirt/'+this.id)
             this.avis = result3.data
             console.log(result3)
         },
@@ -259,13 +264,16 @@ hr{
                         note: this.note,
                         contenu: this.contenu,
                         titre: this.titre,
-                        id_tshirt: this.id_tshirt,
-                        id_user: this.id_user,
+                        id_tshirt: this.id
                     })
                 }else{
                     console.log('user pas connecté')
                 }
                 
+            },
+            setNote(note){
+                this.note = note
+                console.log(this.note)
             }
         }
     }
