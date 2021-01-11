@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h3 v-if="success">Votre Tshirt est en ligne ! Allez dans votre profil pour le voir !</h3>
+        <h3 id="success" v-if="success==1">Votre Tshirt est en ligne ! Allez dans votre profil pour le voir !</h3>
+        <h3 id="error" v-if="success==0">Erreur ! Le tshirt n'as pu être posté !</h3>
         <div class="nouveau_produit">
             <h2>Poster mon Tshirt</h2>
             <form @submit.prevent="addTshirt" id="mon_form">
@@ -79,9 +80,10 @@
 <style scoped>
     h3{
         text-align: center;
-        color: rgb(67, 186, 67);
         margin: 20px 0;
     }
+    #success{color: rgb(67, 186, 67)}
+    #error{color: rgb(186, 67, 67)}
     #bouton{
         background-color: #4D74FF;
         color: white;
@@ -180,7 +182,7 @@ module.exports = {
                 couleur: 0,
                 titre: "",
                 description: "",
-                success: false
+                success: -1
             }
         },
         async created(){
@@ -195,13 +197,15 @@ module.exports = {
                 console.log(e.target.files[0])
             },
             async addTshirt(){
+                this.success = 1
                 await axios.post('/api/tshirt', {
                     description: this.description,
                     titre: this.titre,
                     id_type: this.type,
                     couleurs: [this.couleur]
+                }).catch(function (error) {
+                    this.success = 0  
                 })
-                this.success = true;
             }
         }
     }
