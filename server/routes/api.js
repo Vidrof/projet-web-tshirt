@@ -277,6 +277,24 @@ router.get('/types', async(req, res) => {
   res.send(result.rows)
 })
 
+router.get('/types/:id_type', async(req, res) => {
+  const id_type = req.params.id_type
+
+  const result = await client.query({
+    text : 'SELECT * from types WHERE id_type=$1',
+    values: [id_type]
+  })
+
+  if(result.rows.length <= 0){
+    res.status(401).json({
+      message: 'no type with this id'
+    })
+    return
+  }
+
+  res.send(result.rows[0])
+})
+
 router.get('/couleurs', async(req, res) => {
   const result = await client.query({
     text: 'SELECT * from couleurs'
@@ -302,23 +320,13 @@ router.post('/tshirt', async (req, res) => {
   const titre = req.body.titre
   const id_type = parseInt(req.body.id_type)
   const id_user = req.session.userId
-  const couleurs = req.session.couleurs
+  const couleurs = req.body.couleurs
 
-  var error = []
-  if(typeof description !== "string"){
-    error.append("description not string")
-  }
-  if(typeof titre !== "string"){
-    error.append("description not string")
-  }
-  if(typeof id_type !== "number"){
-    error.append("description not string")
-  }
-  if(typeof couleurs !== "object"){
-    error.append("description not string")
-  }
-  if(error.length){
-    res.status(401).json({ message: 'values incorrect' })
+  if(typeof description !== "string"
+  || typeof titre !== "string"
+  || typeof id_type !== "number"
+  || typeof couleurs !== "object"){
+    res.status(401).json({ message: error })
     return
   }
 
@@ -331,9 +339,10 @@ router.post('/tshirt', async (req, res) => {
   const result = await client.query({
     text: 'SELECT LASTVAL()'
   })
-  const id_tshirt = result.rows[0];
-
-  for(let id_couleur in couleurs){
+  const id_tshirt = result.rows[0].lastval;
+  var i = 0;
+  for(i=0; i<couleurs.length ; i++){
+    var id_couleur = couleurs[i]
     const result2 = await client.query({
       text: 'SELECT * FROM couleurs WHERE id_couleur = $1',
       values: [id_couleur]

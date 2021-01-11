@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h3 v-if="success">Votre Tshirt est en ligne ! Allez dans votre profil pour le voir !</h3>
         <div class="nouveau_produit">
             <h2>Poster mon Tshirt</h2>
             <form @submit.prevent="addTshirt" id="mon_form">
@@ -76,6 +77,11 @@
 </template>
 
 <style scoped>
+    h3{
+        text-align: center;
+        color: rgb(67, 186, 67);
+        margin: 20px 0;
+    }
     #bouton{
         background-color: #4D74FF;
         color: white;
@@ -173,7 +179,8 @@ module.exports = {
                 couleurs: [],
                 couleur: 0,
                 titre: "",
-                description: ""
+                description: "",
+                success: false
             }
         },
         async created(){
@@ -193,18 +200,8 @@ module.exports = {
                     titre: this.titre,
                     id_type: this.type,
                     couleurs: [this.couleur]
-                }).catch(function (error) {
-                    if (error.response) {
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        console.log(error.request);
-                    } else {
-                        console.log('Error', error.message);
-                    }
-
                 })
+                this.success = true;
             }
         }
     }
