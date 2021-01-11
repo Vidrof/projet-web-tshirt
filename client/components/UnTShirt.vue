@@ -3,15 +3,18 @@
         <div id="body">
             <img id="image_annonce" src="./img/young1pact.jpeg">
             <div id="titre_note">
-                <h2 id="titre_annonce">Des tshirts de qualité</h2>
+                <h2 id="titre_annonce">{{tshirt.titre}}</h2>
                 <div class="note">
                     <h3>4.2 </h3><img class="star" src="img/star.png" alt="little star">
                 </div>
             </div>
             <p>11/12/2020</p>
             <hr>
+            <h3>Type de t-shirt :</h3>{{tshirt.type}}
+            <h3>Couleur(s) du t-shirt:</h3>{{tshirt.couleur}}
+            <hr>
             <h3 class="titre">Description :</h3>
-            <p id="description">Des tshirts de qualité avec le message du collectif young 1-pac, nique les salopes qui parlents en scred, si le savoir est une arme hé ba nique ta mere, nique la canine et les stups parce qu’ils nous ont bien... Tu connais</p>
+            <p id="description">{{tshirt.description}}</p>
             <hr>
             <div class="row">
                 <div id="notes">
@@ -59,14 +62,14 @@
                             <img class="star" src="img/star.png">
                             <img class="star" src="img/star.png">
                         </div>
-                        <input id="titre_form" type="text" placeholder="Titre">
-                        <textarea id="description_form" type="text" placeholder="Description"></textarea>
-                        <button>Poster l'avis</button>
+                        <input id="titre_form" type="text" placeholder="Titre" v-model="titre">
+                        <textarea id="description_form" type="text" placeholder="Description" v-model="contenu"></textarea>
+                        <button type="submit">Poster l'avis</button>
                     </div>
                     <div class="commentaire">
                         <div class="profil">
                             <img src="./img/logo.jpg" alt="">
-                            <p>Mathéo du 99</p>
+                            <p>{{avis.id_user}}</p>
                         </div>
                         <div id="stars">
                             <img class="star" src="img/star.png">
@@ -74,9 +77,9 @@
                             <img class="star" src="img/star.png">
                             <img class="star" src="img/star.png">
                             <img class="star" src="img/star.png">
-                            <h4>Pas mal mais la police n'aime pas beaucoup</h4>
+                            <h4>{{avis.titre}}</h4>
                         </div>
-                        <p>J’ai bien essayé de porter ce tshirt à levalois mais la police m’a arrêté et depuis mon anus s’est agrandi de 2.3 centimètres donc je ne peux pas mettre le 5 étoiles ... A bon entendeur......</p>
+                        <p>{{avis.contenu}}</p>
                     </div>
                 </div>
             </div>
@@ -222,5 +225,48 @@ hr{
     margin-bottom: 10px;
 }
 </style>
+
 <script>
+    module.exports = {
+        props: {
+            isConnected: { type: Boolean }
+        },
+        data () {
+            return {
+                type: {},
+                tshirt: {},
+                id: '1',
+                titre: "",
+                contenu: "",
+            }
+        },
+        async created(){
+            const result = await axios.get('/api/types')
+            this.types = result.data
+
+            const result2 = await axios.get('/api/tshirt/')
+            this.tshirt = result2.data
+            console.log(result2)
+
+            const result3 = await axios.get('api/avis/tshirt')
+            this.avis = result3.data
+            console.log(result3)
+        },
+        methods: {
+            async createPost() {
+                if(this.isConnected){
+                    const result = await axios.post('/api/avis', {
+                        note: this.note,
+                        contenu: this.contenu,
+                        titre: this.titre,
+                        id_tshirt: this.id_tshirt,
+                        id_user: this.id_user,
+                    })
+                }else{
+                    console.log('user pas connecté')
+                }
+                
+            }
+        }
+    }
 </script>
