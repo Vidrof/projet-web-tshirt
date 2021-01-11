@@ -100,9 +100,7 @@ module.exports = {
     },
     methods:{
         ouvrirTshirt(){
-            console.log(this.un_tshirt)
-            console.log(this.couleurs)
-            //this.$router.push('/un_tshirt/?id_tshirt='+this.un_tshirt.id_tshirt)
+            this.$router.push('/un_tshirt/?id_tshirt='+this.un_tshirt.id_tshirt)
         }
     }
 }

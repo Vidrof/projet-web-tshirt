@@ -216,7 +216,7 @@ router.post('/avis', async (req, res) => {
   const titre = req.body.titre
   const id_tshirt = req.body.id_tshirt
 
-  const id_user = req.session.id_user
+  const id_user = req.session.userId
 
   if(typeof id_user === 'undefined'){
     res.status(401).json({
@@ -236,7 +236,7 @@ router.post('/avis', async (req, res) => {
   }
 
   await client.query({
-    text: `INSERT INTO tshirt(note, contenu, titre, id_user, id_tshirt)
+    text: `INSERT INTO avis(note, contenu, titre, id_user, id_tshirt)
     VALUES ($1, $2, $3, $4, $5)
     `,
     values: [note, contenu, titre, id_user, id_tshirt]

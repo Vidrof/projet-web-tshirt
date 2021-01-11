@@ -65,6 +65,7 @@
             </header>
             <main>
                 <router-view
+                    :is-connected="isConnected"
                     @login="login"
                 ></router-view>
             </main>

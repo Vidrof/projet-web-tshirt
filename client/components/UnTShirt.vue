@@ -56,30 +56,30 @@
                 <div id="commentaires">
                     <div id="form_commentaire">
                         <div id="stars">
-                            <img class="clickable" @click="setNote(1)" class="star" src="img/star.png">
-                            <img @click="setNote(2)" class="star" src="img/star.png">
-                            <img @click="setNote(3)" class="star" src="img/star.png">
-                            <img @click="setNote(4)" class="star" src="img/star.png">
-                            <img @click="setNote(5)" class="star" src="img/star.png">
+                            <img @click="setNote(1)" class="clickable star" :src="'img/'+isEmpty(1)">
+                            <img @click="setNote(2)" class="clickable star" :src="'img/'+isEmpty(2)">
+                            <img @click="setNote(3)" class="clickable star" :src="'img/'+isEmpty(3)">
+                            <img @click="setNote(4)" class="clickable star" :src="'img/'+isEmpty(4)">
+                            <img @click="setNote(5)" class="clickable star" :src="'img/'+isEmpty(5)">
                         </div>
                         <input id="titre_form" type="text" placeholder="Titre" v-model="titre">
                         <textarea id="description_form" type="text" placeholder="Description" v-model="contenu"></textarea>
-                        <button type="submit">Poster l'avis</button>
+                        <button @click="posterAvis">Poster l'avis</button>
                     </div>
-                    <div class="commentaire">
+                    <div v-for="avi in avis" :key="avi.id_avis" class="commentaire">
                         <div class="profil">
                             <img src="./img/logo.jpg" alt="">
-                            <p>{{avis.id_user}}</p>
+                            <p>{{getUsername(avi.id_user)}}</p>
                         </div>
                         <div id="stars">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <img class="star" src="img/star.png">
-                            <h4>{{avis.titre}}</h4>
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 1)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 2)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 3)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 4)">
+                            <img class="star" :src="'img/'+isEmptyCommentaire(avi.note, 5)">
+                            <h4>{{avi.titre}}</h4>
                         </div>
-                        <p>{{avis.contenu}}</p>
+                        <p>{{avi.contenu}}</p>
                     </div>
                 </div>
             </div>
@@ -241,7 +241,7 @@ hr{
                 id: 11,
                 titre: "",
                 contenu: "",
-                avis:{},
+                avis:[],
                 note: 0
             }
         },
@@ -255,25 +255,46 @@ hr{
 
             const result3 = await axios.get('/api/avis/tshirt/'+this.id)
             this.avis = result3.data
-            console.log(result3)
+            console.log(this.avis)
         },
         methods: {
-            async createPost() {
-                if(this.isConnected){
+            async posterAvis() {
+                console.log(this.isConnected)
+                if(this.isConnected && this.contenu!=="" && this.titre!=="" && this.note!==0){
                     const result = await axios.post('/api/avis', {
                         note: this.note,
                         contenu: this.contenu,
                         titre: this.titre,
                         id_tshirt: this.id
+                    }).catch(function (error) {
+                        console.log(error.response.data)
                     })
                 }else{
-                    console.log('user pas connecté')
+                    console.log('error')
                 }
-                
             },
             setNote(note){
                 this.note = note
-                console.log(this.note)
+            },
+            isEmpty(note){
+                if(note>this.note){
+                    return 'star_none.png'
+                }else{
+                    return 'star.png'
+                }
+            },
+            async getUsername(id_user){
+                const result = await axios.get('/api/users/'+id_user)
+                user = result.data
+                console.log(user)
+                return user.pseudo
+            },
+            isEmptyCommentaire(note, position){
+                if(position>note){
+                    return 'star_none.png'
+                }else{
+                    return 'star.png'
+                }
             }
         }
     }
