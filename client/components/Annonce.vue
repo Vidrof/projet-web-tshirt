@@ -8,7 +8,9 @@
             </div>
             <div class="description">
                 <p>{{un_tshirt.description}}</p>
-                <p>couleur :</p><div v-for="c in couleurs" class='couleurs'></div>
+                <div id='les_couleurs'>
+                    <p>couleur : </p><div class='couleur' :style="{backgroundColor: c.hex}" :key="c.id_couleur" v-for="c in couleurs"></div>
+                </div>
                 <p>type : {{type.nom}}</p>
             </div>
             <button @click="ouvrirTshirt()">En savoir plus</button>
@@ -17,6 +19,14 @@
 </template>
 
 <style scoped>
+    #les_couleurs{
+        display: flex;
+        flex-direction: row;
+    }
+    .couleur{
+        height: 15px;
+        width: 15px;
+    }
     #annonce{
         margin: 20px auto;
         width: 700px;
@@ -73,7 +83,7 @@
 </style>
 <script>
 module.exports = {
-    name:"Annonce",
+    name: "Annonce",
     data () {
         return {
             couleurs: []
@@ -84,16 +94,15 @@ module.exports = {
         type: {type:Object},
     },
     async created(){
-        console.log(this.un_tshirt)
-
-        const result = await axios.get('/api/types')
+        const result = await axios.get('/api/couleur/tshirt/'+this.un_tshirt.id_tshirt)
         this.couleurs = result.data
-        
         console.log(this.couleurs)
     },
     methods:{
         ouvrirTshirt(){
-            this.$router.push('/un_tshirt/?id_tshirt='+this.un_tshirt.id_tshirt)
+            console.log(this.un_tshirt)
+            console.log(this.couleurs)
+            //this.$router.push('/un_tshirt/?id_tshirt='+this.un_tshirt.id_tshirt)
         }
     }
 }

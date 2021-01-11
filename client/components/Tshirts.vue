@@ -28,7 +28,7 @@
         </div>
         <annonce 
             :un_tshirt="tshirt"
-            :type="types[tshirt.id_type]"
+            :type="types.find(x => x.id_type === tshirt.id_type)"
             v-for="tshirt in tshirts"
             v-bind:key="tshirt.id">
         </annonce>
@@ -111,13 +111,12 @@ module.exports = {
     },
     methods:{
         async refreshTshirts(){
-            console.log(this.type)
-            console.log(this.couleur)
             const result = await axios.get('/api/tshirt')
             this.tshirts = result.data
 
             var tshirt_tmp=[]
-            this.tshirts.forEach(tshirt => {
+
+            for(var tshirt of this.tshirts){
                 console.log(tshirt)
                 var ok = true
                 if(this.type!==0){
@@ -125,15 +124,19 @@ module.exports = {
                         ok=false
                     }
                 }
+                const result2 = await axios.get('/api/couleur/tshirt/'+tshirt.id_tshirt)
+                var couleurs = result2.data
+                console.log(this.couleur)
                 if(this.couleur!==0){
-                    if(tshirt.id_couleur!==this.couleur){
+                    console.log(couleurs.find(x => x.id_couleur === this.couleur))
+                    if(typeof couleurs.find(x => x.id_couleur === this.couleur) === 'undefined'){
                         ok=false
                     }
                 }
                 if(ok){
                     tshirt_tmp.push(tshirt)
                 }
-            })
+            }
             this.tshirts=tshirt_tmp
         }
     }
