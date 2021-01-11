@@ -420,4 +420,32 @@ router.get('/users/:id_user', async(req, res) => {
   res.send(result.rows[0])
 })
 
+router.put('/types/:id_type', async(req, res) => {
+  const id_type = req.params.id_type
+
+  const nom = req.body.nom
+  const description = req.body.description
+
+  const result = await client.query({
+    text : `UPDATE types
+            SET nom=$1,
+              description=$2
+            WHERE id_type=$3`,
+    values: [nom,description,id_type]
+  })
+
+  res.send(result.rows[0])
+})
+
+router.delete('/types/:id_type', async(req, res) => {
+  const id_type = req.params.id_type
+
+  const result = await client.query({
+    text : `DELETE FROM types
+            WHERE id_type=$1`,
+    values: [id_type]
+  })
+
+  res.send(result.rows[0])
+})
 module.exports = router
