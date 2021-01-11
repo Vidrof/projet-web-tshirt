@@ -5,22 +5,20 @@
             <form @submit.prevent="addTshirt" id="mon_form">
                 <div class="ajouter_produit">
                     <div class="field_description">
-                        <label for="description">Titre :</label>
                         <input v-model="titre" type="text" id="description" name="description" placeholder="Veuillez saisir un titre">
                     </div>
                     <div class="field_description">
-                        <label for="description">Description :</label>
                         <input v-model="description" type="text" id="description" name="description" placeholder="Veuillez saisir une description">
                     </div>
                     <div class="field_catégorie">
-                        <label for="Catégorie">Type</label>
+                        <label for="Catégorie">Type :</label>
                         <select id="Catégorie" name="catégorie" v-model="type">
                             <option value="none" selected disabled hidden>Type</option>
                             <option v-for="type in types" :key="type.id_type" :value="type.id_type">{{type.nom}}</option>
                         </select>
                     </div>
                     <div class="field_couleur">
-                        <label for="Couleur">Couleur</label>
+                        <label for="Couleur">Couleur :</label>
                         <select id="Couleur" name="couleur" v-model="couleur">
                             <option value="none" selected disabled hidden>Couleur</option>
                             <option v-for="couleur in couleurs" :key="couleur.id_couleur" :value="couleur.id_couleur">{{couleur.nom}}</option>
@@ -28,7 +26,7 @@
                     </div>
                     <div class="field_photo">
                         <label for="photo">Photo(s) :</label>
-                        <input type="file" id="photo" name="photo" placeholder="Photo" accept="image/png, image/jpeg">
+                        <input @change="processFile($event)" type="file" id="photo" name="photo" placeholder="Photo" accept="image/png, image/jpeg">
                     </div>
                     <!--
                     <div class="field_prix">
@@ -49,7 +47,7 @@
                     -->
                 </div>
                 <div class="bottom">
-                    <button>Poster</button>
+                    <input id="bouton" type="submit" value="Poster">
                 </div>
             </form>
         </div>
@@ -78,10 +76,9 @@
 </template>
 
 <style scoped>
-    button{
+    #bouton{
         background-color: #4D74FF;
         color: white;
-        padding: 10px 20px;
         border-radius: 50px;
         border: none;
         margin-right: auto;
@@ -89,10 +86,10 @@
         margin-top:20px;
         margin-bottom:20px;
     }
-    button:hover{
+    #bouton:hover{
         background-color: #416aff;
     }
-    button:active{
+    #bouton:active{
         background-color: #416aff;
         box-shadow: inset 20px 20px 60px #375ad9, 
             inset -20px -20px 60px #4b7aff;
@@ -175,10 +172,9 @@ module.exports = {
                 type: 0,
                 couleurs: [],
                 couleur: 0,
+                titre: "",
+                description: ""
             }
-        },
-        async mounted () {
-            console.log(this.isConnected)
         },
         async created(){
             const result = await axios.get('/api/types')
@@ -187,5 +183,29 @@ module.exports = {
             const result2 = await axios.get('/api/couleurs')
             this.couleurs = result2.data
         },
+        methods: {
+            processFile(e) {
+                console.log(e.target.files[0])
+            },
+            async addTshirt(){
+                await axios.post('/api/tshirt', {
+                    description: this.description,
+                    titre: this.titre,
+                    id_type: this.type,
+                    couleurs: [this.couleur]
+                }).catch(function (error) {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log('Error', error.message);
+                    }
+
+                })
+            }
+        }
     }
 </script>

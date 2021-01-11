@@ -136,39 +136,6 @@ router.post('/register', async (req, res) => {
   res.send('ok')
 })
 
-// poster un tshirt
-router.post('/tshirt', async (req, res) => {
-  const description = req.body.description
-  const id_user = req.session.id_user
-  const image = req.body.image
-  const titre = req.body.titre
-
-  if(typeof id_user === 'undefined'){
-    res.status(401).json({
-      message: 'you are not connected'
-    })
-    return
-  }
-
-  if(typeof description === 'undefined'
-    || typeof image === 'undefined'
-    || typeof titre === 'undefined'){
-    res.status(401).json({
-      message: 'tshirt incomplete'
-    })
-    return
-  }
-
-  await client.query({
-    text: `INSERT INTO tshirt(description, id_user, image, titre)
-    VALUES ($1, $2, $3, $4)
-    `,
-    values: [description, id_user, image, titre]
-  })
-  
-  res.send('ok')
-})
-
 //recupérer tous les tshirts
 router.get('/tshirt', async(req, res) => {
   const result = await client.query({
@@ -323,5 +290,69 @@ router.get('/couleurs', async(req, res) => {
   }
 
   res.send(result.rows)
+})
+
+router.post('/tshirt', async (req, res) => {
+  if (typeof req.session.userId === 'undefined') {
+    res.status(401).json({ message: 'not connected' })
+    return
+  }
+
+  const description = req.body.description
+  const titre = req.body.titre
+  const id_type = parseInt(req.body.id_type)
+  const id_user = req.session.userId
+  const couleurs = req.session.couleurs
+
+  var error = []
+  if(typeof description !== "string"){
+    error.append("description not string")
+  }
+  if(typeof titre !== "string"){
+    error.append("description not string")
+  }
+  if(typeof id_type !== "number"){
+    error.append("description not string")
+  }
+  if(typeof couleurs !== "object"){
+    error.append("description not string")
+  }
+  if(error.length){
+    res.status(401).json({ message: 'values incorrect' })
+    return
+  }
+
+  await client.query({
+    text: `INSERT INTO tshirt (description, titre, id_type, id_user)
+    VALUES ($1, $2, $3, $4)`,
+    values: [description, titre, id_type, id_user]
+  })
+
+  const result = await client.query({
+    text: 'SELECT LASTVAL()'
+  })
+  const id_tshirt = result.rows[0];
+
+  for(let id_couleur in couleurs){
+    const result2 = await client.query({
+      text: 'SELECT * FROM couleurs WHERE id_couleur = $1',
+      values: [id_couleur]
+    })
+
+    if(result.rows.length <= 0){
+      res.status(401).json({
+        message: 'no couleurs with this id'
+      })
+      return
+    }
+
+    await client.query({
+      text: `INSERT INTO couleur_tshirt (id_tshirt, id_couleur)
+      VALUES ($1, $2)`,
+      values: [id_tshirt, id_couleur]
+    })
+  }
+
+  res.send('ok')
 })
 module.exports = router
