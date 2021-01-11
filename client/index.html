@@ -38,8 +38,9 @@
                 justify-content: center;
             }
             header .logo{
-                width: 40px;
-                height: 40px;
+                width: 30px;
+                height: 30px;
+                background-color: #383838;
             }
 
             header .logo_profil{
@@ -53,10 +54,10 @@
         <div id="app">
             <header>
                 <nav>
-                    <router-link id="home" to='/'><img class="logo" src="img/logo.jpg"></router-link>
+                    <router-link id="home" to='/'><img class="logo" src="img/accueil.png"></router-link>
                     <router-link to='/tshirts'>Tshirts</router-link>
                     <router-link to='/createurs'>Créateurs</router-link>
-                    <img v-if="isConnected" class="logo_profil" src="./img/profil.png">
+                    <img v-if="isConnected" class="logo_profil" src="img/profil.png">
                     <router-link v-if="isConnected" to='/vente'>Poster</router-link>
                     <router-link v-if="!isConnected" to='/log_in'>Se connecter</router-link>
                     <router-link v-if="!isConnected" to='/sign_up'>S'enregistrer</router-link>

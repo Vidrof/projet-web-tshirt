@@ -1,19 +1,18 @@
 <template>
     <div>
         <div>
-            <h1>Des T-shirts en veux-tu en voilà !!!</h1>
-            <p class="texte-acceuil">
-                Notre site a pour vocation de réveiller des vocations. 
-                Je sais ce que vous vous dites, c’est du baratin. 
-                Mais non j’y crois vraiment. 
+            <h1>Bienvenue sur le site T-shirt Time !</h1>
+            <p class="texte-accueil">
+                Notre site a pour vocation de réveiller des vocations.<br> 
+                Ici, vous pourrez poster vos créations de Tshirts, consultez celles des autres et interagir avec leur auteurs !
             </p> 
         </div>
         <div class="carre-noir">
             <div class="titre-carre">
-                <p> Les T-Shirts du mois ! </p>
+                <p> Les T-shirts du mois ! </p>
             </div>
             <div class="texte-carre">
-                <p> Des créateurs de talents, des T-shirts de renom :</p>
+                <p> Des créateurs de talents, et des T-shirts d'exceptions !</p>
             </div>
             <div class="images-du-mois">
                 <img id="img1" src="./img/logo.jpg" alt="image de tshirt">
@@ -39,7 +38,7 @@
         line-height: 135px;
         text-align: center;
     }
-    .texte-acceuil{
+    .texte-accueil{
         text-align: center;
         font-size: 28px;
         margin-left: 120px;
