@@ -57,7 +57,7 @@
                     <router-link id="home" to='/'><img class="logo" src="img/accueil.png"></router-link>
                     <router-link to='/tshirts'>Tshirts</router-link>
                     <img v-if="isConnected" class="logo_profil" src="img/profil.png">
-                    <router-link v-if="isConnected" to='/vente'>Poster</router-link>
+                    <router-link v-if="isConnected" to='/poster'>Poster</router-link>
                     <router-link v-if="!isConnected" to='/log_in'>Se connecter</router-link>
                     <router-link v-if="!isConnected" to='/sign_up'>S'enregistrer</router-link>
                     <img v-if="isConnected" class="logo_profil" src="./img/deconnexion.png" v-on:click="deconnect()">
@@ -76,7 +76,7 @@
             const UnTshirt = window.httpVueLoader('./components/UnTShirt.vue')
             const UnCreateur = window.httpVueLoader('./components/UnCreateur.vue')
             const Sign_up = window.httpVueLoader('./components/Sign_up.vue')
-            const Vente = window.httpVueLoader('./components/Vente.vue')
+            const Poster = window.httpVueLoader('./components/Poster.vue')
             const Log_in = window.httpVueLoader('./components/Log_in.vue')
 
             const routes = [
@@ -86,7 +86,7 @@
                 { path: '/un_createur', component: UnCreateur, meta: {title: 'Page créateur'} },
                 { path: '/sign_up', component: Sign_up, meta: {title: 'S\'enregistrer'}},
                 { path: '/log_in', component: Log_in, meta :{title: 'Se connecter'}},
-                { path: '/vente', component: Vente, meta: {title: 'Vente'}},
+                { path: '/poster', component: Poster, meta: {title: 'Poster'}},
             ]
             const router = new VueRouter({
                 routes
