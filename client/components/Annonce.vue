@@ -4,7 +4,7 @@
         <div class="texte">
             <div class="titre">
                 <h3 id="titre_annonce">{{un_tshirt.titre}}</h3>
-                <div class="note"><h3>4.2 </h3><img class="star" src="img/star.svg" alt="little star"></div>
+                <div class="note"><h3>{{average_avis}} </h3><img class="star" src="img/star.svg" alt="little star"></div>
             </div>
             <div class="description">
                 <p>{{un_tshirt.description}}</p>
@@ -86,7 +86,8 @@ module.exports = {
     name: "Annonce",
     data () {
         return {
-            couleurs: []
+            couleurs: [],
+            average_avis:"t"
         }
     },
     props: {
@@ -96,6 +97,14 @@ module.exports = {
     async created(){
         const result = await axios.get('/api/couleur/tshirt/'+this.un_tshirt.id_tshirt)
         this.couleurs = result.data
+
+        const result6 = await axios.get('/api/average/avis/tshirt/'+this.un_tshirt.id_tshirt)
+        var avg = result6.data.avg
+        if(avg === null){
+            this.average_avis = "0.00"
+        }else{
+            this.average_avis = avg.slice(0, 3)
+        }
     },
     methods:{
         ouvrirTshirt(){
