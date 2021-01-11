@@ -13,7 +13,7 @@
             <h3 class="titre">Ses création :</h3>
             <div id="creations">
                 <div v-for="creation in creations" :key="creation.id_tshirt" class="creation">
-                    <img src="./img/young1pact.jpeg" alt="un de ses tshirts" @click="ouvrirTshirt(creation.id_tshirt)">
+                    <img src="./img/young1pact.jpg" alt="un de ses tshirts" @click="ouvrirTshirt(creation.id_tshirt)">
                     <h3>{{creation.titre}}</h3>
                 </div>
             </div>
