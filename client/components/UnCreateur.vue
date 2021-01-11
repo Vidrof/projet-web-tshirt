@@ -4,9 +4,6 @@
             <img id="image_annonce" src="./img/logo.jpg">
             <div id="titre_note">
                 <h2 id="titre_annonce">{{user.pseudo}}</h2>
-                <div class="note">
-                    <h3>4.2 </h3><img class="star" src="img/star.png" alt="little star">
-                </div>
             </div>
             <p>11/12/2020</p>
             <hr>

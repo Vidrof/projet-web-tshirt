@@ -1,6 +1,6 @@
 <template>
     <div id="body">
-        <img id="image_annonce" src="./img/young1pact.jpeg">
+        <img id="image_annonce" src="./img/young1pact.jpg">
         <div id="titre_note">
             <h2 id="titre_annonce"> {{tshirt.titre}}</h2>
             <div class="note_créateur">
@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="créateur">
-            <h3>Créateur du T-shirt :</h3> {{users.pseudo}}
+            <h3>Créateur du T-shirt :</h3> <p @click="openCreateur(users.id_user)">{{users.pseudo}}</p>
         </div>
         <hr>
         <div class="type_couleur">
@@ -307,6 +307,9 @@
                     }else{
                         return 'star.png'
                     }
+                },
+                openCreateur(id_user){
+                    this.$router.push('/un_createur/?id_user='+id_user)
                 }
             }
     }
