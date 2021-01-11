@@ -8,7 +8,7 @@
             </div>
             <div class="description">
                 <p>{{un_tshirt.description}}</p>
-                <p>couleur :</p><div v-for="c in couleurs" class='couleurs'></div>
+                <p>couleur :</p><div v-for="couleur in couleurs" v-bind:key="couleur.id_couleur" class='couleurs'></div>
                 <p>type : {{type.nom}}</p>
             </div>
             <button @click="ouvrirTshirt()">En savoir plus</button>
